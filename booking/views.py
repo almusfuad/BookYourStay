@@ -15,6 +15,7 @@ class BookingCreateView(CreateView):
     model = Booking
     form_class = BookingForm
     template_name = 'booking_form.html'
+    success_url = reverse_lazy('hotel:home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
