@@ -111,7 +111,7 @@ def profile_details(request):
       profile = Student.objects.get(user = request.user)
       return render(request, 'student/profile.html', {'profile': profile})
 
-def edit_profile(request):
+def profile_edit(request):
       profile = Student.objects.get(user = request.user)
       if request.method == 'POST':
             form = StudentProfileForm(request.POST, request.FILES, instance=profile)
