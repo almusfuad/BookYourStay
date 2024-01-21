@@ -33,13 +33,13 @@ class RegistrationView(CreateView):
             user.save()
             
             # create student instance
-            # student = Student.objects.create(
-            #       user = user,
-            #       phone = form.cleaned_data['phone'],
-            #       country = form.cleaned_data['country'],
-            #       image = form.cleaned_data['image'],
-            #       account_no = 10000 + user.id,
-            # )
+            student = Student.objects.create(
+                  user = user,
+                  phone = form.cleaned_data['phone'],
+                  country = form.cleaned_data['country'],
+                  image = form.cleaned_data['image'],
+                  account_no = 10000 + user.id,
+            )
             
 
             # generate token

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+    <h2>Deposit Confirmation</h2>
+    
+    <p>Dear {{ transaction.student.user.first_name }},</p>
+
+    <p>Your deposit of ${{ transaction.amount }} has been successfully processed.</p>
+
+    <p>Transaction Details:</p>
+    <ul>
+        <li>Transaction ID: {{ transaction.id }}</li>
+        <li>Amount: ${{ transaction.amount }}</li>
+        <li>Date: {{ transaction.date_created }}</li>
+        <!-- Add more transaction details as needed -->
+    </ul>
+
+    <p>Thank you for choosing our services. Your account has been updated.</p>
+
+    <!-- Add any additional content or images here -->
+
+    <p>Best regards,<br>
+       The BookYourStay Finance Team</p>
+</body>
+</html>

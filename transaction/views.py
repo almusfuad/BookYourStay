@@ -8,6 +8,11 @@ from student.models import Student
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+
+# emails
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+
 # Create your views here.
 class DepositCreateView(CreateView):
       model = Transaction
@@ -28,6 +33,12 @@ class DepositCreateView(CreateView):
             student.save()
             
             Transaction.objects.create(student = student, amount = deposit_amount)
+            
+            email_subject = 'Deposit Confirmation'
+            email_body = render_to_string('email/deposit_success.html', {'transaction': transaction})
+            email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
+            email.attach_alternative(email_body, 'text/html')
+            email.send()
             
             messages.success(self.request, 'Deposit successful!')
             return super().form_valid(form)
