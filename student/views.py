@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
 from .forms import RegistrationForm, StudentProfileForm
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
