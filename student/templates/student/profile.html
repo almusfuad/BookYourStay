@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+      {{student.user.username}}
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+      {{ form.first_name.label_tag }} {{ form.first_name }}
+      <br>
+  
+      {{ form.last_name.label_tag }} {{ form.last_name }}
+      <br>
+  
+      {{ form.phone.label_tag }} {{ form.phone }}
+      <br>
+  
+      {{ form.country.label_tag }} {{ form.country }}
+      <br>
+  
+      {{ form.account_no.label_tag }} {{ form.account_no }}
+      <br>
+  
+      {{ form.balance.label_tag }} {{ form.balance }}
+      <br>
+  
+      {{ form.user__username.label_tag }} {{ form.user__username }}
+      <br>
+  
+      {{ form.user__email.label_tag }} {{ form.user__email }}
+      <br>
+  
+      {{ form.image.label_tag }} {{ form.image }}
+      <br>
+  
+      <button type="submit">Save Changes</button>
+  </form>
+  {% endblock %}

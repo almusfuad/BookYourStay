@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
-from .forms import RegistrationForm
+from .forms import RegistrationForm, StudentProfileForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
@@ -27,6 +27,16 @@ class RegistrationView(CreateView):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+            
+            # create student instance
+            # student = Student.objects.create(
+            #       user = user,
+            #       phone = form.cleaned_data['phone'],
+            #       country = form.cleaned_data['country'],
+            #       image = form.cleaned_data['image'],
+            #       account_no = 10000 + user.id,
+            # )
+            
 
             # generate token
             token = default_token_generator.make_token(user)
@@ -40,6 +50,7 @@ class RegistrationView(CreateView):
             email_subject = 'Confirm Email'
             email_body = render_to_string('email/confirm_email.html', {'confirm_link': confirm_link})
             email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
+            email.attach_alternative(email_body, 'text/html')
             email.send()
             
 
@@ -94,3 +105,19 @@ def custom_logout(request):
 
     # Handle GET requests if needed
     return redirect('student:login')
+
+
+def profile_details(request):
+      profile = Student.objects.get(user = request.user)
+      return render(request, 'student/profile.html', {'profile': profile})
+
+def edit_profile(request):
+      profile = Student.objects.get(user = request.user)
+      if request.method == 'POST':
+            form = StudentProfileForm(request.POST, request.FILES, instance=profile)
+            if form.is_valid():
+                  form.save()
+      else:
+            form = StudentProfileForm(instance=profile)
+                  
+      return render(request, 'profile.html', {'form': form})

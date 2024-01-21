@@ -16,11 +16,11 @@
                                     {% if user.is_authenticated %}
                                           <li>
                                                
-                                                <a href="#">Profile <span class="fa fa-angle-down"
+                                                <a href="">Profile <span class="fa fa-angle-down"
                                                             aria-hidden="true"></span></a>
                                                 <input type="checkbox" id="drop-2" />
                                                 <ul>
-                                                      <li><a href="" class="drop-text">Profile</a></li>
+                                                      <li><a href="{% url 'student:profile' %}" class="drop-text">Profile</a></li>
                                                       <li><a href="{% url 'transaction:deposit' %}" class="drop-text">Deposit</a></li>
                                                       <li><a href="{% url 'student:logout' %}" class="drop-text">Logout</a></li>
                                                 </ul>
