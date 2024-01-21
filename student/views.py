@@ -104,15 +104,15 @@ class CustomLoginView(LoginView):
       #             logger.error("User is not active.")      
             
       #       return response
-      
-def custom_logout(request):
-    if request.method == 'POST':
-        logout(request)
-        messages.success(request, 'Logout successful.')
-        return redirect('student:login') 
 
-    # Handle GET requests if needed
-    return redirect('student:login')
+@login_required 
+def custom_logout(request):
+      logout(request)
+      messages.success(request, 'Logout successful.')
+      return redirect('student:login') 
+
+#     # Handle GET requests if needed
+#     return redirect('student:login')
 
 
 @login_required
