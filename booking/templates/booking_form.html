@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Booking{% endblock %}
+
+{% block content %}
+
+<div class="register-w3 py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold">Booking Form</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Let's book your stay!</p>
+        <div class="comment-top mt-5">
+            <div class="comment-bottom mobamuinfo_mail_grid_right">
+                <form method="post" action="{% url 'booking:booking-create' hotel_slug=hotel_slug %}" id="bookingForm">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.arrival_date.id_for_label }}">Arrival Date:</label>
+                            {{ form.arrival_date }}
+                        </div>
+  
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.departure_date.id_for_label }}">Departure Date:</label>
+                            {{ form.departure_date }}
+                        </div>
+                    </div>
+  
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.room_type.id_for_label }}">Room Type:</label>
+                            {{ form.room_type }}
+                        </div>
+  
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.no_of_guests.id_for_label }}">Number of Guests:</label>
+                            {{ form.no_of_guests }}
+                        </div>
+                    </div>
+  
+                    <button type="submit" class="btn submit mt-3" onclick="bookNow()">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}{{hotel.name}} - Details{% endblock %}
+{% block content %}
+    <div class="blog-w3l py-5">
+        <div class="container py-xl-5 py-lg-3">
+            <h3 class="tittle text-center text-bl font-weight-bold">{{ hotel.name }} Details</h3>
+            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">{{ hotel.address }}</p>
+
+            <div class="blog_section px-lg-5">
+                <div class="card border-0">
+                    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid">
+                    <div class="card-body p-0 py-4">
+                        <div class="row border-bottom pb-3">
+                            <div class="col-sm-6 col-4 perso-wthree">
+                                <h6 class="blog-first text-bl">
+                                    <span class="fa fa-user mr-2"></span>{{ hotel.name }}
+                                </h6>
+                            </div>
+                            <div class="col-sm-6 col-8 info-commt text-right">
+                                <ul class="blog_list">
+                                    <li>Price: ${{ hotel.price }}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="my-3">Facilities:</p>
+                        <ul class="style-lists">
+                            {% for facility in hotel.facilities.all %}
+                                <li>{{ facility.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
+                        {% endif %}
+
+                        <!-- Reviews -->
+                        <p class="my-3">Reviews:</p>
+                        {% for review in reviews %}
+                            <div class="media mt-3">
+                                <img src="{{ review.student.image.url }}" alt="{{ review.student.user.get_full_name }}" class="img-fluid" />
+                                <div class="media-body pt-xl-2 pl-3">
+                                    <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
+                                    <p>{{ review.review }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                        {% if not review_form %}
+                            <hr>
+                            <p class="my-3">Write a Review:</p>
+                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.id %}">
+                                {% csrf_token %}
+                                {{ review_form.as_p }}
+                                <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                    </div>
+                </div>
+
+                <!-- Add more content as needed -->
+
+                <!-- <div class="comment-top mt-5">
+                    <h4>Leave a Comment</h4>
+                    <div class="comment-bottom mobamuinfo_mail_grid_right">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="Name" placeholder="Name" required="">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="Email" placeholder="Email" required="">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="Subject" placeholder="Subject" required="">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="Message" placeholder="Message..." required=""></textarea>
+                            </div>
+                            <button type="submit" class="btn submit mt-4">Submit</button>
+                        </form>
+                    </div>
+                </div> -->
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

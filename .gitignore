@@ -1,0 +1,17 @@
+#Ignore compiled python files
+*.pyc
+*.pyo 
+*.pyd
+*.db
+
+#ignore the virtual Environment
+
+#Ignore the database file
+# db.sqlite3
+
+# Ignore environment files
+.env 
+
+
+# igonore virtual environment
+hotel_book/

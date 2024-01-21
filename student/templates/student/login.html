@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="login-w3 py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold">Login Form</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome back! Log in to your account.</p>
+        <div class="comment-top mt-5">
+            <div class="comment-bottom mobamuinfo_mail_grid_right">
+                <form method="post" action="{% url 'student:login' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.username.id_for_label }}">Username</label>
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.password.id_for_label }}">Password</label>
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn submit mt-3">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

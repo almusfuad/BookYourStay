@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+
+<div class="register-w3 py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold">Registration Form</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Let's every journey find a home!</p>
+        <div class="comment-top mt-5">
+            <div class="comment-bottom mobamuinfo_mail_grid_right">
+                <form method="post" action="{% url 'student:register' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.username.id_for_label }}">Username</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.country.id_for_label }}">Country</label>
+                            {{ form.country }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-lg-6 form-group">
+                            <label for="{{ form.password1.id_for_label }}">Password</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="col-lg-6 form-group">
+                              <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                              {{ form.password2 }}
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                              <label for="{{ form.image.id_for_label }}">Image</label>
+                              {{ form.image }}
+                          </div>
+                        
+                    </div>
+                    <button type="submit" class="btn submit mt-3">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

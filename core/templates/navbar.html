@@ -1,0 +1,94 @@
+<header>
+      <div class="container-fluid">
+            <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2">
+                  <!-- logo -->
+                  <div id="logo">
+                        <h1><a href="{% url 'hotel:home' %}">BookYourStay</a></h1>
+                  </div>
+                  <!-- //logo -->
+                  <!-- nav -->
+                  <div class="nav_w3ls">
+                        <nav>
+                              <label for="drop" class="toggle">Menu</label>
+                              <input type="checkbox" id="drop" />
+                              <ul class="menu">
+                                    <li><a href="{% url 'hotel:home' %}" class="active">Home</a></li>
+                                    {% if user.is_authenticated %}
+                                          <li>
+                                               
+                                                <a href="#">Profile <span class="fa fa-angle-down"
+                                                            aria-hidden="true"></span></a>
+                                                <input type="checkbox" id="drop-2" />
+                                                <ul>
+                                                      <li><a href="" class="drop-text">Profile</a></li>
+                                                      <li><a href="{% url 'transaction:deposit' %}" class="drop-text">Deposit</a></li>
+                                                      <li><a href="{% url 'student:logout' %}" class="drop-text">Logout</a></li>
+                                                </ul>
+                                          </li>
+                                    {% else %}
+                                    <li><a href="{% url 'student:login' %}">Login</a></li>
+                                    <li><a href="{% url 'student:register' %}">Register</a></li>
+                                    {% endif %}
+                              </ul>
+                        </nav>
+                  </div>
+                  <!-- //nav -->
+            </div>
+      </div>
+</header>
+
+{% if request.path != '/' %}
+<!-- banner -->
+<div class="banner_w3lspvt-2">
+
+</div>
+<!-- //banner -->
+</div>
+<!-- //main banner -->
+
+<!-- page details -->
+<div class="breadcrumb-mobamu">
+      <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                  <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{request.path}}</li>
+      </ol>
+</div>
+<!-- //page details -->
+
+<!-- banner bottom -->
+<div class="banner-bottom py-5">
+      <div class="d-md-flex container py-xl-3 py-lg-3">
+            <div class="banner-left-bottom-w3ls">
+                  <h6 class="text-wh let">Easiest way to book Hotels and Rooms</h6>
+                  <h3 class="text-wh my-3">Welcome to BookYourStay</h3>
+                  <p>Enjoy Your Every Day and Night when you outside of your home.<br></p>
+            </div>
+            <div class="button offset-lg-2 offset-md-1">
+                  <a href="about.html" class="btn w3ls-button-mobamu">Read More</a>
+            </div>
+      </div>
+</div>
+
+<!-- about -->
+<!-- <section class="about py-5" id="about">
+      <div class="container py-xl-5 py-lg-3">
+            <div class="row py-md-5">
+                  <div class="col-lg-4 about-left-w3pvt offset-lg-1 mt-lg-4">
+                        <div class="main-img">
+                              <img src="images/blog1.jpg" alt="" class="img-fluid pos-aboimg">
+                              <img src="images/blog2.jpg" alt="" class="img-fluid pos-aboimg2">
+                        </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-7 about-right offset-xl-1">
+                        <h4 class="sub-tittle-w3layouts let">About Us</h4>
+                        <h3 class="tittle-w3layouts text-uppercase pr-lg-5 mt-2">Every Journey Finds a Home</h3>
+                        <p class="mt-4 mb-4">At BookYourStay, we are not just a booking site; we are your travel companion, committed to turning every journey into an unforgettable experience. Join us in exploring the world one stay at a time. BookYourStay – Where Your Next Adventure Begins!</p>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit.</p>
+                        <a href="about.html" class="btn button-style-2 mt-sm-5 mt-4">Read More</a>
+                  </div>
+            </div>
+      </div>
+</section> -->
+{% endif %}

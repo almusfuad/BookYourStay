@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}BookYourStay{% endblock %}
+
+{% block content %}
+{% include 'slider.html' %}
+<div class="rooms-w3ls bg-li py-5" id="price">
+      <div class="container-fluid py-xl-5 py-lg-3">
+          <h3 class="tittle text-center text-bl font-weight-bold">Available Hotels</h3>
+          <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
+          
+          <div class="row">
+              {% for hotel in hotels %}
+                  <div class="col-lg-4 price-mobamus">
+                      <div class="price-top">
+                          <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
+                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid" />
+                          </a>
+                      </div>
+                      <div class="price-w3ls-bottom p-4">
+                          <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank">{{ hotel.name }}</a></h4>
+                          <div class="lm-item-price">
+                              <h6>
+                                  <span class="price-top-head">$</span>
+                                  <span class="price-midd-head">{{ hotel.price }}</span>
+                                  <span class="price-right-head">/ per day</span>
+                              </h6>
+                          </div>
+                          <ul class="style-lists">
+                              {% for facility in hotel.facilities.all %}
+                                  <li>{{ facility.name }}</li>
+                              {% endfor %}
+                          </ul>
+                          <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+
+
+  <!-- reviews -->
+  <section class="team-main-sec bg-li py-5" id="testi">
+      <div class="container py-xl-5 py-lg-3">
+            <h3 class="tittle text-center text-bl font-weight-bold">Our Guests Love Us</h3>
+            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
+            <div class="row text-center">
+    
+                {% for review in reviews %}
+                <div class="col-lg-4 col-md-6 team-gd-info">
+                    <div class="team-gd">
+                        <div class="team-img mb-4">
+                            <img src="{{ review.student.image.url }}" class="img-fluid" alt="user-image">
+                        </div>
+                        <div class="team-info">
+                            <h3>{{ review.student.user.get_full_name }} <span class="sub-tittle-team">{{ review.student.country }}</span> </h3>
+                            <ul class="list-unstyled my-md-4 my-3">
+                                {% for _ in review.rating %}
+                                <li><span class="fa fa-star"></span></li>
+                                {% endfor %}
+                            </ul>
+                            <p>{{ review.review }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+        </div>
+  </section>
+{% endblock %}
