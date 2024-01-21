@@ -30,6 +30,7 @@ class RegistrationForm(UserCreationForm):
             return user
       
 class StudentProfileForm(forms.ModelForm):
+      readonly_fields = ['account_no', 'balance', ]
       class Meta:
             model = Student
             fields = ['phone', 'country', 'account_no', 'balance', 'image']
@@ -41,7 +42,7 @@ class StudentProfileForm(forms.ModelForm):
             def __init__(self, *args, **kwargs):
                   super().__init__(*args, **kwargs)
                   
-                  readonly_fields = ['account_no', 'balance', 'user__username', 'user__email']
+                  
                   
                   for field in readonly.fields:
                         self.fields[field].widget.attrs['readonly'] = True

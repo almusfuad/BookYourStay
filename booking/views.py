@@ -9,6 +9,11 @@ from django.contrib import messages
 from hotel.models import Hotel
 from student.models import Student
 from django.urls import reverse
+from django.core.exceptions import ValidationError
+
+# email
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 class BookingCreateView(CreateView):
@@ -41,17 +46,22 @@ class BookingCreateView(CreateView):
 
             Transaction.objects.create(student=student, amount=booking_amount, status='B')
 
-            messages.success(self.request, 'Booking successful.')
-            
-            
             email_subject = 'Booking Confirmation'
             email_body = render_to_string('email/booking_confirmation.html', {'booking': form.instance})
             email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
             email.attach_alternative(email_body, 'text/html')
             email.send()
+            messages.success(self.request, 'Booking successful.')
             return redirect('hotel:home')
+        else:
+            messages.error(self.request, 'Insufficient balance. Please add funds to your account.')
+            form.add_error(None, 'Insufficient balance. Please add funds to your account.')
+            return self.render_to_response(self.get_context_data(form=form))
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'Insufficient balance. Please add funds to your account.')
 
-        return super().form_valid(form)
+        return redirect('hotel:home')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

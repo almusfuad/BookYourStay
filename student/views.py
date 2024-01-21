@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
 from .forms import RegistrationForm, StudentProfileForm
@@ -8,6 +9,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # displaying messages
 from django.contrib import messages
@@ -116,20 +120,27 @@ def custom_logout(request):
 #     return redirect('student:login')
 
 
-@login_required
-def profile_details(request):
-      profile = Student.objects.get(user = request.user)
-      return render(request, 'student/profile.html', {'profile': profile})
+@method_decorator(login_required, name = 'dispatch') 
+class ProfileUpdateView(UpdateView):
+      model = Student
+      form_class = StudentProfileForm
+      template_name = 'student/profile.html'
+      success_url = reverse_lazy('student:profile')
 
-@login_required
-def profile_edit(request):
-      profile = Student.objects.get(user = request.user)
-      if request.method == 'POST':
-            form = StudentProfileForm(request.POST, request.FILES, instance=profile)
-            if form.is_valid():
-                  form.save()
-                  messages.success(request, 'Profile updated successfully.')
-      else:
-            form = StudentProfileForm(instance=profile)
-                  
-      return render(request, 'profile.html', {'form': form})
+      def get_object(self, queryset=None):
+            return self.request.user.student
+
+      def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['student'] = self.request.user.student
+            context['update'] = self.get_object()
+            return context
+
+      def form_valid(self, form):
+            form.instance.user = self.request.user
+            messages.success(self.request, 'Profile updated successfully.')
+            return super().form_valid(form)
+
+      def form_invalid(self, form):
+            messages.error(self.request, 'Profile update failed. Please check your forms.')
+            return super().form_invalid(form)

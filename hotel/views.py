@@ -29,6 +29,7 @@ class HotelDetailsView(DetailView):
             context = super().get_context_data(**kwargs)
             hotel = self.get_object()
             context['reviews'] = Review.objects.filter(hotel = hotel)
+            context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = self.request.user.student).exists()
             return context
 
 
@@ -65,7 +66,7 @@ class ReviewCreateView(CreateView):
       def get_form_kwargs(self):
             kwargs = super().get_form_kwargs()
             kwargs['user'] = self.request.user
-            return Kwargs
+            return kwargs
       
 
 @method_decorator(login_required, name = 'dispatch')      
@@ -121,3 +122,14 @@ class ReviewUpdateView(UpdateView):
 class ReviewListView(ListView):
     model = Review
     context_object_name = 'reviews'
+    
+    
+class BookingDetails(ListView):
+      model = Booking
+      context_object_name = 'bookings'
+      
+      def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['bookings'] = Booking.objects.filter(student=self.request.user.student, hotel=self.request.hotel)
+            return context
+            

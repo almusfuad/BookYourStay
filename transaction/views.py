@@ -32,7 +32,7 @@ class DepositCreateView(CreateView):
             student.balance += deposit_amount
             student.save()
             
-            Transaction.objects.create(student = student, amount = deposit_amount)
+            transaction = Transaction.objects.create(student = student, amount = deposit_amount)
             
             email_subject = 'Deposit Confirmation'
             email_body = render_to_string('email/deposit_success.html', {'transaction': transaction})

@@ -1,40 +1,83 @@
 {% extends 'base.html' %}
 
 {% block title %}
-      {{student.user.username}}
+    {{ student.user.username }} - Edit Profile
 {% endblock %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-  
-      {{ form.first_name.label_tag }} {{ form.first_name }}
-      <br>
-  
-      {{ form.last_name.label_tag }} {{ form.last_name }}
-      <br>
-  
-      {{ form.phone.label_tag }} {{ form.phone }}
-      <br>
-  
-      {{ form.country.label_tag }} {{ form.country }}
-      <br>
-  
-      {{ form.account_no.label_tag }} {{ form.account_no }}
-      <br>
-  
-      {{ form.balance.label_tag }} {{ form.balance }}
-      <br>
-  
-      {{ form.user__username.label_tag }} {{ form.user__username }}
-      <br>
-  
-      {{ form.user__email.label_tag }} {{ form.user__email }}
-      <br>
-  
-      {{ form.image.label_tag }} {{ form.image }}
-      <br>
-  
-      <button type="submit">Save Changes</button>
-  </form>
-  {% endblock %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Edit Profile</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group row">
+                <label for="{{ form.first_name.id_for_label }}" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-10">
+                    {{ student.user.first_name }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="{{ form.last_name.id_for_label }}" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                    {{ student.user.last_name }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="{{ form.phone.id_for_label }}" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    {{ form.phone }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="{{ form.country.id_for_label }}" class="col-sm-2 col-form-label">Country</label>
+                <div class="col-sm-10">
+                    {{ form.country }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                  <label for="{{ form.account_no.id_for_label }}" class="col-sm-2 col-form-label">Account Number</label>
+                  <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="{{ form.account_no.id_for_label }}" value="{{ form.account_no.value }}">
+                  </div>
+              </div>
+              
+              <div class="form-group row">
+                  <label for="{{ form.balance.id_for_label }}" class="col-sm-2 col-form-label">Balance</label>
+                  <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="{{ form.balance.id_for_label }}" value="{{ form.balance.value }}">
+                  </div>
+              </div>
+
+            <div class="form-group row">
+                <label for="{{ form.user.username.id_for_label }}" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    {{ student.user.username }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="{{ form.user.email.id_for_label }}" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    {{ student.user.email }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="{{ form.image.id_for_label }}" class="col-sm-2 col-form-label">Profile Image</label>
+                <div class="col-sm-10">
+                    {{ student.user.image }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

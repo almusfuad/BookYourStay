@@ -34,6 +34,43 @@
                         {% endif %}
 
                         <!-- Reviews -->
+                        
+                       
+                        
+                        
+                    </div>
+
+                        {% if user_has_booked %}
+                        <div>
+                            {% if not review_form %}
+                            <hr>
+                            <p class="my-3">Write a Review:</p>
+                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.id %}">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  
+                                        id="{{ review_form.rating.id_for_label }}" 
+                                        value="{{ review_form.rating.value }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="{{ review_form.review.id_for_label }}" class="col-sm-2 col-form-label">Review: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                        id="{{ review_form.review.id_for_label }}" 
+                                        value="{{ review_form.review.id_for_label }}">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+
                         <p class="my-3">Reviews:</p>
                         {% for review in reviews %}
                             <div class="media mt-3">
@@ -45,18 +82,7 @@
                             </div>
                         {% endfor %}
 
-                        {% if user.is_authenticated %}
-                        {% if not review_form %}
-                            <hr>
-                            <p class="my-3">Write a Review:</p>
-                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.id %}">
-                                {% csrf_token %}
-                                {{ review_form.as_p }}
-                                <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
-                            </form>
-                        {% endif %}
-                    {% endif %}
-                    </div>
+                        
                 </div>
 
                 <!-- Add more content as needed -->
