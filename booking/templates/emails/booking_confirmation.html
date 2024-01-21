@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Booking Confirmation</h2>
+    
+    <p>Dear {{ booking.student.user.first_name }},</p>
+
+    <p>Your booking at {{ booking.hotel.name }} has been confirmed.</p>
+
+    <p>Details:</p>
+    <ul>
+        <li>Hotel: {{ booking.hotel.name }}</li>
+        <li>Check-in Date: {{ booking.arrival_date }}</li>
+        <li>Check-out Date: {{ booking.departure_date }}</li>
+        <li>Room Type: {% if booking.room_type == 'S' %}Single{% elif booking.room_type == 'D' %}Double{% elif booking.room_type == 'F' %}Family{% endif %}</li>
+        <li>Number of Guests: {{ booking.no_of_guests }}</li>
+        <!-- Add more booking details as needed -->
+    </ul>
+
+    <p>Thank you for choosing our hotel. We look forward to hosting you!</p>
+
+    <p>Best regards,<br>
+       The BookYourStay Team</p>
+</body>
+</html>

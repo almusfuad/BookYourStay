@@ -34,9 +34,16 @@
 </head>
 <body>
 	{% block header %}
+	{% include 'messages.html' %}
         {% include 'navbar.html' %}
     {% endblock %}
     {% block content %}{% endblock %}
     {% include 'footer.html' %}
+    <script>
+	// Close Bootstrap alert after 2000 milliseconds (2 seconds)
+	setTimeout(function () {
+	    $('.alert').alert('close');
+	}, 2000);
+  </script>
 </body>
 </html>

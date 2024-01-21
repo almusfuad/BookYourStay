@@ -33,6 +33,7 @@ class BookingCreateView(CreateView):
 
         booking_amount = hotel.price
 
+
         if student.balance >= booking_amount:
             student.balance -= booking_amount
             student.save()
@@ -40,6 +41,13 @@ class BookingCreateView(CreateView):
             Transaction.objects.create(student=student, amount=booking_amount, status='B')
 
             messages.success(self.request, 'Booking successful.')
+            
+            
+            email_subject = 'Booking Confirmation'
+            email_body = render_to_string('email/booking_confirmation.html', {'booking': form.instance})
+            email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
+            email.attach_alternative(email_body, 'text/html')
+            email.send()
             return redirect('hotel:home')
 
         return super().form_valid(form)

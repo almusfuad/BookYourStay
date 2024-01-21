@@ -23,8 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('student/', include('student.urls', namespace='student')),
     path('', include('hotel.urls', namespace='hotel')),
-    path('booking', include('booking.urls', namespace='booking')),
-    path('transaction', include('transaction.urls', namespace='transaction')),
+    path('booking/', include('booking.urls', namespace='booking')),
+    path('transaction/', include('transaction.urls', namespace='transaction')),
 ]
 
 

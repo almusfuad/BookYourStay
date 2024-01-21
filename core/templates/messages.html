@@ -1,0 +1,32 @@
+{% for message in messages %}
+<div class="alert
+            {% if message.tags == 'success' %}alert-success{% endif %}
+            {% if message.tags == 'warning' %}alert-warning{% endif %}
+            {% if message.tags == 'error' %}alert-danger{% endif %}
+            alert-dismissible fade show" role="alert">
+    <div class="d-flex">
+        <div class="py-1">
+            <svg class="bi bi-check-circle
+                     {% if message.tags == 'success' %}text-success{% endif %}
+                     {% if message.tags == 'warning' %}text-warning{% endif %}
+                     {% if message.tags == 'error' %}text-danger{% endif %}
+                     mr-4" width="24" height="24" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 18a8 8 0 100-16 8 8 0 000 16z"/>
+                <path d="M15 7a1 1 0 00-1.7-.7l-4 4a1 1 0 01-1.4 0l-2-2a1 1 0 00-1.4 1.4L9 11l3.3 3.3a1 1 0 001.4 0l5-5A1 1 0 0015 7z"/>
+            </svg>
+        </div>
+        <div>
+            <p class="font-weight-bold">
+                {% if message.tags == 'success' %}Success!{% endif %}
+                {% if message.tags == 'warning' %}Warning!{% endif %}
+                {% if message.tags == 'error' %}Error!{% endif %}
+            </p>
+            <p class="text-sm">{{ message }}</p>
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+{% endfor %}
