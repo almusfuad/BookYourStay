@@ -107,9 +107,10 @@ class CustomLoginView(LoginView):
 
 @login_required 
 def custom_logout(request):
-      logout(request)
-      messages.success(request, 'Logout successful.')
-      return redirect('student:login') 
+      if request.method == "GET":
+            logout(request)
+            messages.success(request, 'Logout successful.')
+            return redirect('student:login') 
 
 #     # Handle GET requests if needed
 #     return redirect('student:login')
