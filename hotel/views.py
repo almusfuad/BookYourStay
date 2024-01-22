@@ -46,23 +46,17 @@ class ReviewCreateView(CreateView):
             student_id = self.kwargs.get('student_id')
             print('Checking')
             
-            rating = form.cleaned_data['rating']
-            review = form.cleaned_data['review']
+            rating = form.cleaned_data['rating']  # Corrected this line
+            review = form.cleaned_data['review']  # Corrected this line
             
-            hotel_instance = get_object_or_404(hotel, id = hotel_id)
-            student_instance = get_object_or_404(student, id = student_id)
+            hotel_instance = get_object_or_404(Hotel, id=hotel_id)
+            student_instance = get_object_or_404(Student, id=student_id)
             
-            
-            if Booking.objects.filter(hotel = hotel_instance, student=self.request.user).exists():
+            if Booking.objects.filter(hotel=hotel_instance, student=self.request.user.student).exists():
                   form.instance.hotel = hotel_instance
                   form.instance.student = student_instance
-                  review_instance = Review.objects.create(
-                        hotel = hotel_instance,
-                        student = student_instance,
-                        rating = rating,
-                        review = review,
-                  )
-                  
+                  review_instance = form.save()  # Use form.save() to save the instance
+                        
                   print(review_instance)
                   
                   self.object = review_instance
@@ -95,7 +89,31 @@ class ReviewCreateView(CreateView):
       
       def get_success_url(self):
             return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})
+
+# def create_review(request, hotel_id):
+#       print('Hitting review')
+#       student = get_object_or_404(Student, user = request.user)
+#       hotel = get_object_or_404(Hotel, id = hotel_id)
+#       # booking = Booking.objects.filter(hotel=hotel_id, student=student)
+#       reviews = get_object_or_404(Review, hotel=hotel)
+#       form = ReviewForm()
+#       if request.method == 'POST':
+#             form = ReviewForm(request.POST)
+#             if form.is_valid():
+#                   # rating = form.cleaned_data['rating']
+#                   # review = form.cleaned_data['review']
+#                   review = form.save(commit=False)
+#                   hotel = get_object_or_404(Hotel, id = hotel_id)
+#                   # student = get_object_or_404(Student, id = student_id)
+#                   review.hotel = hotel
+#                   review.student = student
+#                   review.save()
                   
+#             reviews = get_object_or_404(Review, hotel=hotel)
+#             return render(request, 'hotel_details.html', {'reviews': reviews, 'hotel': hotel, 'form': form, 'user_has_booked': True})
+#       else:
+#             return render(request, 'hotel_details.html', {'reviews': reviews, 'hotel': hotel, 'form': form, 'user_has_booked': True})
+                                
             
       
       
