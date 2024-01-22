@@ -32,6 +32,15 @@ class RegistrationView(CreateView):
       success_url = reverse_lazy('student:login')
 
       def form_valid(self, form):
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            
+            print(password1, password2)
+            
+            if password1 != password2:
+                  messages.error(self.request, 'Passwords do not match.')
+                  return self.form_invalid(form)
+            
             user = form.save(commit=False)
             user.is_active = False
             user.save()
@@ -90,8 +99,17 @@ def activate(request, uid64, token):
 class CustomLoginView(LoginView):
       template_name = 'student/login.html'
       
-      def get_success_url(self):
+      
+      
+      def form_valid(self, form):
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            # print(password)
             messages.success(self.request, 'Login successful.')
+            return super().form_valid(form)
+      
+      def get_success_url(self):
             return reverse_lazy('hotel:home')
       
       # def form_valid(self, form):

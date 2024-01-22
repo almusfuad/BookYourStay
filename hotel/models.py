@@ -28,9 +28,17 @@ class Hotel(models.Model):
       
       
 class Review(models.Model):
+      RATING_CHOICES = [
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
+      
       hotel = models.ForeignKey(Hotel, related_name='reviews', on_delete=models.CASCADE)
       student = models.ForeignKey(Student, related_name='reviews', on_delete=models.CASCADE)
-      rating = models.IntegerField()
+      rating = models.CharField(choices=RATING_CHOICES, max_length=10)
       review = models.TextField()
       
       def __str__(self):

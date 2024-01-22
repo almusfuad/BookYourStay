@@ -32,7 +32,13 @@
   
                         <div class="col-lg-6 form-group">
                             <label for="{{ form.no_of_guests.id_for_label }}">Number of Guests:</label>
-                            {{ form.no_of_guests }}
+                            <input 
+                            type="number" 
+                            class="w-100 p-2" 
+                            style="border: 1px solid rgb(197, 197, 197); height: 46px;"
+                            name="no_of_guests"
+                            id="{{ form.no_of_guests.id_for_label }}"
+                            >
                         </div>
                     </div>
   

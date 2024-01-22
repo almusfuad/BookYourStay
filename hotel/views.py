@@ -38,35 +38,66 @@ class ReviewCreateView(CreateView):
       model =  Review
       form_class = ReviewForm
       template_name = 'hotel/hotel_details.html'
+      success_url = reverse_lazy("hotel:home")
       
-      
-      def get_success_url(self):
-            return reverse_lazy('hotel:review_create', kwargs={'hotel_id': self.object.hotel.id, 'student_id': self.object.student.id})
       
       def form_valid(self, form):
             hotel_id = self.kwargs.get('hotel_id')
             student_id = self.kwargs.get('student_id')
+            print('Checking')
+            
+            rating = form.cleaned_data['rating']
+            review = form.cleaned_data['review']
             
             hotel_instance = get_object_or_404(hotel, id = hotel_id)
             student_instance = get_object_or_404(student, id = student_id)
             
+            
             if Booking.objects.filter(hotel = hotel_instance, student=self.request.user).exists():
                   form.instance.hotel = hotel_instance
                   form.instance.student = student_instance
-                  messages.success(request, 'Review submitted successfully.')
+                  review_instance = Review.objects.create(
+                        hotel = hotel_instance,
+                        student = student_instance,
+                        rating = rating,
+                        review = review,
+                  )
+                  
+                  print(review_instance)
+                  
+                  self.object = review_instance
+                  messages.success(self.request, 'Review submitted successfully.')
                   return super().form_valid(form)
             else:
                   messages.error(self.request, 'You can only review hotels you have booked.')
                   return self.form_invalid(form)
-                  
+            
       def form_invalid(self, form):
             messages.error(self.request, 'Error submitting the review. Please check your input.')
-            return super().form_invalid(form)      
-            
+            return super().form_invalid(form)    
+      
+        
+      def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            hotel_id = self.kwargs.get('hotel_id')
+            hotel_instance = get_object_or_404(Hotel, id = hotel_id)
+            user = self.request.user
+            student = Student.objects.get(user = user)
+            context['student'] = student
+            context['hotel'] = hotel_instance
+            context['user_has_booked'] = Booking.objects.filter(hotel=hotel_instance, student = user.student).exists()
+            return context
+      
       def get_form_kwargs(self):
             kwargs = super().get_form_kwargs()
             kwargs['user'] = self.request.user
             return kwargs
+      
+      def get_success_url(self):
+            return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})
+                  
+            
+      
       
 
 @method_decorator(login_required, name = 'dispatch')      
@@ -76,7 +107,7 @@ class ReviewUpdateView(UpdateView):
       template_name = 'hotel/hotel_details.html'
       
       def get_success_url(self):
-            return reverse_lazy('hotel:review_update', kwargs={'pk': self.object.id, 'hotel_id': self.object.hotel.id, 'student_id': self.object.student.id})
+            return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})
       
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)

@@ -10,10 +10,10 @@
           
           <div class="row">
               {% for hotel in hotels %}
-                  <div class="col-lg-4 price-mobamus">
+                  <div class="col-lg-4 price-mobamus" style="height: 600px">
                       <div class="price-top">
                           <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
-                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid" />
+                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 420px; height: 250px;" />
                           </a>
                       </div>
                       <div class="price-w3ls-bottom p-4">
@@ -26,7 +26,7 @@
                               </h6>
                           </div>
                           <ul class="style-lists">
-                              {% for facility in hotel.facilities.all %}
+                              {% for facility in hotel.facilities.all|slice:":3" %}
                                   <li>{{ facility.name }}</li>
                               {% endfor %}
                           </ul>

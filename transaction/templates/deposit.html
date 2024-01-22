@@ -13,7 +13,13 @@
                     <div class="row">
                         <div class="col-lg-6 form-group">
                             <label for="{{ form.amount.id_for_label }}">Amount</label>
-                            {{ form.amount }}
+                            <input 
+                            type="number" 
+                            class="w-100 p-2" 
+                            style="border: 1px solid rgb(197, 197, 197); height: 46px;"
+                            name="amount"
+                            id="{{ form.amount.id_for_label }}"
+                            >
                         </div>
                     </div>
                     <button type="submit" class="btn submit mt-3">Deposit</button>

@@ -1493,6 +1493,11 @@ h4.sub-con-fo {
     background: #F44336;
 }
 
+input {
+    height: 60px; 
+    
+}
+
 /* //team */
 /* //about page*/
 
@@ -1611,6 +1616,8 @@ select.form-control:not([size]):not([multiple]) {
 [type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
 }
+
+
 
 .date-plu input {
     border: none;
@@ -1922,7 +1929,7 @@ form#contactform1 {
     }
 
     .mobamuinfo_mail_grid_right input[type="text"],
-    .mobamuinfo_mail_grid_right input[type="email"],
+    /* .mobamuinfo_mail_grid_right input[type="email"], */
     .mobamuinfo_mail_grid_right textarea,
     .mobamuinfo_mail_grid_right select {
         font-size: 14px;

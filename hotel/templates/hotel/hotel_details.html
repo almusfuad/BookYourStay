@@ -30,7 +30,9 @@
                             {% endfor %}
                         </ul>
                         {% if user.is_authenticated %}
-                            <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
+                            {% if not user_has_booked %}
+                                <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
+                            {% endif %}
                         {% endif %}
 
                         <!-- Reviews -->
@@ -38,35 +40,45 @@
                        
                         
                         
-                    </div>
-
-                        {% if user_has_booked %}
-                        <div>
-                            {% if not review_form %}
+                    </div> 
+                </div>
+                {% if user_has_booked %}
+                        <div class="col-8">
                             <hr>
-                            <p class="my-3">Write a Review:</p>
-                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.id %}">
+                            <p class="my-3">Write your Review:</p>
+                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.student.id %}">
                                 {% csrf_token %}
                                 <div class="form-group row">
-                                    <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
-                                    <div class="col-sm-10">
-                                        <input type="text"  
-                                        id="{{ review_form.rating.id_for_label }}" 
-                                        value="{{ review_form.rating.value }}">
+                                    <label for="{{ form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
+                                    <div class="col-10">
+                                        <select class="p-2" id="{{ form.rating.id_for_label }}" name="rating">
+                                            <option value="1">1 star</option>
+                                            <option value="2">2 stars</option>
+                                            <option value="3">3 stars</option>
+                                            <option value="4">4 stars</option>
+                                            <option value="5">5 stars</option>
+                                          </select>
+                                            
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label for="{{ review_form.review.id_for_label }}" class="col-sm-2 col-form-label">Review: </label>
-                                    <div class="col-sm-10">
-                                        <input type="text"
-                                        id="{{ review_form.review.id_for_label }}" 
-                                        value="{{ review_form.review.id_for_label }}">
+                                    <label for="{{ form.review.id_for_label }}" class="col-sm-2 col-form-label">Review: </label>
+                                    <div class="col-6">
+                                        <textarea 
+                                            class="textarea"
+                                            rows="3"
+                                            style="width: 200px; height:200px;" 
+                                            type="text"
+                                            id="{{ form.review.id_for_label }}" 
+                                            value="{{ form.review.id_for_label }}"
+                                            name = 'review'    
+                                        ></textarea>
+                                        
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
                             </form>
-                            {% endif %}
                         </div>
                         {% endif %}
 
@@ -81,9 +93,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-
-                        
-                </div>
 
                 <!-- Add more content as needed -->
 

@@ -36,6 +36,7 @@ class BookingCreateView(CreateView):
         
         form.instance.hotel = hotel
         form.instance.student = student
+        no_of_guests = form.cleaned_data['no_of_guests']
 
         booking_amount = hotel.price
 
@@ -43,6 +44,8 @@ class BookingCreateView(CreateView):
         if student.balance >= booking_amount:
             student.balance -= booking_amount
             student.save()
+            
+            form.save()
 
             Transaction.objects.create(student=student, amount=booking_amount, status='B')
 

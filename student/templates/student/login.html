@@ -18,9 +18,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 form-group">
+                        <div class="col-lg-6 form-group d-flex flex-column">
                             <label for="{{ form.password.id_for_label }}">Password</label>
-                            {{ form.password }}
+                            <input 
+                            name = 'password'
+                            class="p-2" 
+                            type="password" 
+                            id="{{ form.password.id_for_label }}"
+                            style="border: 1px solid rgb(182, 178, 178); height: 46px;"
+                            >
                         </div>
                     </div>
                     <button type="submit" class="btn submit mt-3">Login</button>
