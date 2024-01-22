@@ -26,7 +26,7 @@
                               </h6>
                           </div>
                           <ul class="style-lists">
-                              {% for facility in hotel.facilities.all|slice:":3" %}
+                              {% for facility in hotel.facilities.all|slice:"3" %}
                                   <li>{{ facility.name }}</li>
                               {% endfor %}
                           </ul>
@@ -50,7 +50,6 @@
                 <div class="col-lg-4 col-md-6 team-gd-info">
                     <div class="team-gd">
                         <div class="team-img mb-4">
-                            <img src="{{ review.student.image.url }}" class="img-fluid" alt="user-image">
                         </div>
                         <div class="team-info">
                             <h3>{{ review.student.user.get_full_name }} <span class="sub-tittle-team">{{ review.student.country }}</span> </h3>

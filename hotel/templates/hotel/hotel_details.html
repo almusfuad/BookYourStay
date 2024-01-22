@@ -46,35 +46,33 @@
                         <div class="col-8">
                             <hr>
                             <p class="my-3">Write your Review:</p>
-                            <form method="post" action="{% url 'hotel:review-create' hotel_id=hotel.id student_id=user.student.id %}">
+                            <form method="post" action="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
                                 {% csrf_token %}
                                 <div class="form-group row">
-                                    <label for="{{ form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
+                                    <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating: </label>
                                     <div class="col-10">
-                                        <select class="p-2" id="{{ form.rating.id_for_label }}" name="rating">
+                                        <select class="p-2" id="" name="rating">
                                             <option value="1">1 star</option>
                                             <option value="2">2 stars</option>
                                             <option value="3">3 stars</option>
                                             <option value="4">4 stars</option>
                                             <option value="5">5 stars</option>
                                           </select>
-                                            
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label for="{{ form.review.id_for_label }}" class="col-sm-2 col-form-label">Review: </label>
+                                    <label for="{{ review_form.review.id_for_label }}" class="col-sm-2 col-form-label">Review: </label>
                                     <div class="col-6">
                                         <textarea 
                                             class="textarea"
                                             rows="3"
                                             style="width: 200px; height:200px;" 
                                             type="text"
-                                            id="{{ form.review.id_for_label }}" 
-                                            value="{{ form.review.id_for_label }}"
+                                            id="{{ review_form.review.id_for_label }}" 
+                                            
                                             name = 'review'    
                                         ></textarea>
-                                        
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
@@ -86,7 +84,6 @@
                         <p class="my-3">Reviews:</p>
                         {% for review in reviews %}
                             <div class="media mt-3">
-                                <img src="{{ review.student.image.url }}" alt="{{ review.student.user.get_full_name }}" class="img-fluid" />
                                 <div class="media-body pt-xl-2 pl-3">
                                     <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
                                     <p>{{ review.review }}</p>
