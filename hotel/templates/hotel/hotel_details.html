@@ -85,7 +85,7 @@
                         {% for review in reviews %}
                             <div class="media mt-3">
                                 <div class="media-body pt-xl-2 pl-3">
-                                    <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
+                                    <h5 class="mb-2">{{ review.student.user.get_full_name }}    {{review.rating}}*</h5>
                                     <p>{{ review.review }}</p>
                                 </div>
                             </div>

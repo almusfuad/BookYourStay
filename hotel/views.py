@@ -18,6 +18,11 @@ class HotelListView(ListView):
       template_name = 'hotel/home.html'
       context_object_name = 'hotels'
       
+      def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['reviews'] = Review.objects.all()
+            return context
+      
 class HotelDetailsView(DetailView):
       model = Hotel
       template_name = 'hotel/hotel_details.html'
@@ -28,6 +33,7 @@ class HotelDetailsView(DetailView):
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             hotel = self.get_object()
+            
             context['reviews'] = Review.objects.filter(hotel = hotel)
             context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = self.request.user.student).exists()
             context['review_form'] = ReviewForm(user = self.request.user)
@@ -64,36 +70,7 @@ class HotelDetailsView(DetailView):
                   print(review_form.errors)
                   messages.error(request, 'Error submitting the review. Please check your input.')
                   return redirect('hotel:hotel_detail', slug = hotel_instance.slug)
-                  
-
-
-
-# def create_review(request, hotel_id):
-#       print('Hitting review')
-#       student = get_object_or_404(Student, user = request.user)
-#       hotel = get_object_or_404(Hotel, id = hotel_id)
-#       # booking = Booking.objects.filter(hotel=hotel_id, student=student)
-#       reviews = get_object_or_404(Review, hotel=hotel)
-#       form = ReviewForm()
-#       if request.method == 'POST':
-#             form = ReviewForm(request.POST)
-#             if form.is_valid():
-#                   # rating = form.cleaned_data['rating']
-#                   # review = form.cleaned_data['review']
-#                   review = form.save(commit=False)
-#                   hotel = get_object_or_404(Hotel, id = hotel_id)
-#                   # student = get_object_or_404(Student, id = student_id)
-#                   review.hotel = hotel
-#                   review.student = student
-#                   review.save()
-                  
-#             reviews = get_object_or_404(Review, hotel=hotel)
-#             return render(request, 'hotel_details.html', {'reviews': reviews, 'hotel': hotel, 'form': form, 'user_has_booked': True})
-#       else:
-#             return render(request, 'hotel_details.html', {'reviews': reviews, 'hotel': hotel, 'form': form, 'user_has_booked': True})
-                                
-            
-      
+                        
       
 
 @method_decorator(login_required, name = 'dispatch')      

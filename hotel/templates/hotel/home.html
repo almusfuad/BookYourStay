@@ -10,10 +10,10 @@
           
           <div class="row">
               {% for hotel in hotels %}
-                  <div class="col-lg-4 price-mobamus" style="height: 600px">
+                  <div class="col-lg-4 price-mobamus gap-2" style="height: 600px">
                       <div class="price-top">
                           <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
-                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 420px; height: 250px;" />
+                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
                           </a>
                       </div>
                       <div class="price-w3ls-bottom p-4">
@@ -54,9 +54,7 @@
                         <div class="team-info">
                             <h3>{{ review.student.user.get_full_name }} <span class="sub-tittle-team">{{ review.student.country }}</span> </h3>
                             <ul class="list-unstyled my-md-4 my-3">
-                                {% for _ in review.rating %}
-                                <li><span class="fa fa-star"></span></li>
-                                {% endfor %}
+                                
                             </ul>
                             <p>{{ review.review }}</p>
                         </div>
