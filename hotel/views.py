@@ -33,11 +33,15 @@ class HotelDetailsView(DetailView):
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             hotel = self.get_object()
-            context['reviews'] = Review.objects.filter(hotel = hotel)
-            context['review_owner'] = Review.objects.filter(hotel=hotel, student=self.request.user.student).exists()
-            context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = self.request.user.student).exists()
-            context['review_form'] = ReviewForm(user = self.request.user)
-            return context
+            
+            if self.request.user.is_authenticated:
+                  context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = student).exists()
+                  context['review_owner'] = Review.objects.filter(hotel=hotel, student=student).exists()
+                  return context
+            else:
+                  context['reviews'] = Review.objects.filter(hotel = hotel)
+                  context['review_form'] = ReviewForm(user = self.request.user)
+                  return context
       
       def post(self, request, *args, **kwargs):
             review_form = ReviewForm(user = request.user, data = self.request.POST, )
