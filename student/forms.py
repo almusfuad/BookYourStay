@@ -11,7 +11,7 @@ class RegistrationForm(UserCreationForm):
 
       class Meta:
             model = User
-            fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+            fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2',]
 
       def save(self, commit=True):
             user = super().save(commit=False)
@@ -20,13 +20,19 @@ class RegistrationForm(UserCreationForm):
             user.last_name = self.cleaned_data['last_name']
             if commit == True:
                   user.save()
-                  Student.objects.create(
-                        user=user, 
-                        phone=self.cleaned_data['phone'],
-                        country=self.cleaned_data['country'], 
-                        image=self.cleaned_data['image'],
-                        account_no = 100000 + user.id,
-                  )
+                  
+                  student = Student.objects.create(
+                              user=user, 
+                              phone=self.cleaned_data['phone'],
+                              country=self.cleaned_data['country'], 
+                              image=self.cleaned_data['image'],
+                              account_no = 100000 + user.id,
+                        )
+                  
+            if self.cleaned_data['image']:
+                  student.image = self.cleaned_data['image']
+                  student.save()
+
             return user
       
 class StudentProfileForm(forms.ModelForm):

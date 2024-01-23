@@ -33,8 +33,9 @@ class HotelDetailsView(DetailView):
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             hotel = self.get_object()
-            
+            context['review_edit'] = Review.objects.get(hotel=hotel, student=self.request.user.student)
             context['reviews'] = Review.objects.filter(hotel = hotel)
+            context['review_owner'] = Review.objects.filter(hotel=hotel, student=self.request.user.student).exists()
             context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = self.request.user.student).exists()
             context['review_form'] = ReviewForm(user = self.request.user)
             return context
@@ -71,69 +72,3 @@ class HotelDetailsView(DetailView):
                   messages.error(request, 'Error submitting the review. Please check your input.')
                   return redirect('hotel:hotel_detail', slug = hotel_instance.slug)
                         
-      
-
-@method_decorator(login_required, name = 'dispatch')      
-class ReviewUpdateView(UpdateView):
-      model = Review
-      form_class = ReviewForm
-      template_name = 'hotel/hotel_details.html'
-      
-      def get_success_url(self):
-            return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})
-      
-      def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context["is_author"] = self.object.student == self.request.user
-            return context
-      
-      def form_valid(self, form):
-            hotel_instance = self.object.hotel
-            student_instance = self.object.student
-
-            if self.object.student == self.request.user and Booking.objects.filter(hotel = hotel_instance, student = self.request.user).exists():
-                  messages.success(self.request, 'Review successfully submitted.')
-                  return super().form_valid(form)
-            else:
-                  message.error(self.request, 'You are not the owner of the comment.')
-                  return self.form_invalid(form)
-
-      def form_invalid(self, form):
-            messages.error(self.request, 'Error updating the review. Please check your input.')
-            return super().form_invalid(form)
-      
-      
-# @method_decorator(login_required, name='dispatch')
-# class ReviewDeleteView(DeleteView):
-      model = Review
-      template_name = 'hotel/review_confirm_delete.html'  # You may need to create a separate template for confirmation
-      success_url = reverse_lazy('home')
-
-      def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['is_author'] = self.object.student == self.request.user
-            return context
-
-      def delete(self, request, *args, **kwargs):
-            self.object = self.get_object()
-            if self.object.student == self.request.user and Booking.objects.filter(hotel=self.object.hotel, student=self.request.user).exists():
-                  return super().delete(request, *args, **kwargs)
-            else:
-                  messages.error(self.request, 'You are not the owner of the comment.')
-                  return redirect('home') 
-
-
-class ReviewListView(ListView):
-    model = Review
-    context_object_name = 'reviews'
-    
-    
-class BookingDetails(ListView):
-      model = Booking
-      context_object_name = 'bookings'
-      
-      def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['bookings'] = Booking.objects.filter(student=self.request.user.student, hotel=self.request.hotel)
-            return context
-            

@@ -30,30 +30,44 @@ class RegistrationView(CreateView):
       form_class = RegistrationForm
       template_name = 'student/register.html'
       success_url = reverse_lazy('student:login')
+      
+      def post(self, request, *args, **kwargs):
+            form = self.form_class(request.POST, request.FILES)
+            if form.is_valid():
+                  return self.form_valid(form)
+            else:
+                  return self.form_invalid(form)
 
       def form_valid(self, form):
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
-            
-            print(password1, password2)
-            
+                  
+            # print(password1, password2)
+            phone=form.cleaned_data['phone']
+            country=form.cleaned_data['country']
+            image=form.cleaned_data['image']
+                  
+            print(f'image: {image}, phone: {phone}, country: {country}')
+                  
             if password1 != password2:
                   messages.error(self.request, 'Passwords do not match.')
                   return self.form_invalid(form)
-            
+                  
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            
+                  
             # create student instance
             student = Student.objects.create(
-                  user = user,
-                  phone = form.cleaned_data['phone'],
-                  country = form.cleaned_data['country'],
-                  image = form.cleaned_data['image'],
-                  account_no = 10000 + user.id,
+                  user=user, 
+                  phone=phone,
+                  country=country, 
+                  image=image,
+                  account_no = 100000 + user.id,
             )
-            
+                  
+                  
+                  
 
             # generate token
             token = default_token_generator.make_token(user)
@@ -61,7 +75,7 @@ class RegistrationView(CreateView):
             confirm_link = self.request.build_absolute_uri(
                   reverse_lazy('student:activate', args=[uid, token])
             )
-            
+                  
 
             # sending email
             email_subject = 'Confirm Email'
@@ -69,13 +83,15 @@ class RegistrationView(CreateView):
             email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
             email.attach_alternative(email_body, 'text/html')
             email.send()
-            
+                  
             messages.success(self.request, 'Account created successfully. Please check your email for activation.')
             return redirect('student:login')
 
       def form_invalid(self, form):
-            messages.error(self.request, 'Account creation failed. Please check your forms.')
-            return render(self.request, 'student/register.html', {'form': form})
+                  for error in form,errors:
+                        messages.error(self.request, f'Account creation failed. {error}')
+                  return render(self.request, 'student/register.html', {'form': form})
+            
       
 def activate(request, uid64, token):
       try:
