@@ -35,6 +35,7 @@ class HotelDetailsView(DetailView):
             hotel = self.get_object()
             
             if self.request.user.is_authenticated:
+                  student = self.request.user.student
                   context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = student).exists()
                   context['review_owner'] = Review.objects.filter(hotel=hotel, student=student).exists()
                   return context
