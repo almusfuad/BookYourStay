@@ -33,7 +33,6 @@ class HotelDetailsView(DetailView):
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             hotel = self.get_object()
-            context['review_edit'] = Review.objects.get(hotel=hotel, student=self.request.user.student)
             context['reviews'] = Review.objects.filter(hotel = hotel)
             context['review_owner'] = Review.objects.filter(hotel=hotel, student=self.request.user.student).exists()
             context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = self.request.user.student).exists()
