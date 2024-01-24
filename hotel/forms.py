@@ -6,7 +6,7 @@ class ReviewForm(forms.ModelForm):
             model = Review
             fields = ['rating', 'review']
             widgets = {
-                  'rating': forms.Select(choices=Review.RATING_CHOICES),
+                  'rating': forms.Select(),
                   'review': forms.Textarea(attrs={'rows': 4, 'cols': 50}),
             }
 
@@ -14,6 +14,7 @@ class ReviewForm(forms.ModelForm):
             print('print after init in forms.py')
             super().__init__(*args, **kwargs)
             self.user = user  # storing user for letter use
+            self.fields['rating'].choices = Review.RATING_CHOICES
 
       def set_hotel_field(self, hotel_instance):
             self.fields['hotel'].initial = hotel_instance

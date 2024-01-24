@@ -2,7 +2,63 @@
 {% block title %}BookYourStay{% endblock %}
 
 {% block content %}
-{% include 'slider.html' %}
+<!-- banner -->
+<div class="banner_w3lspvt">
+    <div class="csslider infinity" id="slider1">
+          <input type="radio" name="slides" checked="checked" id="slides_1" />
+          <input type="radio" name="slides" id="slides_2" />
+          <input type="radio" name="slides" id="slides_3" />
+          <input type="radio" name="slides" id="slides_4" />
+          <ul class="banner_slide_bg">
+                <li>
+                      <div class="container">
+                            <div class="w3ls_banner_txt">
+                                  <p>Welcome to BookYourStay</p>
+                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
+                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                            </div>
+                      </div>
+                </li>
+                <li>
+                      <div class="container">
+                            <div class="w3ls_banner_txt">
+                                  <p>Welcome to BookYourStay</p>
+                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
+                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                            </div>
+                      </div>
+                </li>
+                <li>
+                      <div class="container">
+                            <div class="w3ls_banner_txt">
+                                  <p>Welcome to BookYourStay</p>
+                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
+                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                            </div>
+                      </div>
+                </li>
+                <li>
+                      <div class="container">
+                            <div class="w3ls_banner_txt">
+                                  <p>Welcome to BookYourStay</p>
+                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
+                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                            </div>
+                      </div>
+                </li>
+          </ul>
+          <div class="arrows">
+                <label for="slides_1"></label>
+                <label for="slides_2"></label>
+                <label for="slides_3"></label>
+                <label for="slides_4"></label>
+          </div>
+    </div>
+</div>
+<!-- //banner -->
+</div>
+
+
 <div class="rooms-w3ls bg-li py-5" id="price">
       <div class="container-fluid py-xl-5 py-lg-3">
           <h3 class="tittle text-center text-bl font-weight-bold">Available Hotels</h3>
@@ -75,4 +131,36 @@
             </div>
         </div>
   </section>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            setInterval(() => {
+                // check the current slide
+                var currentSlide = $("input[name='slides']:checked");
+    
+                // find the next radio input using :checked selector
+                var nextSlide = currentSlide.closest('li').next('li').find("input[name='slides']");
+    
+                // if there is no next slide, go back to the first one
+                if (nextSlide.length === 0) {
+                    nextSlide = $('input[name="slides"]:first');
+                }
+    
+                // uncheck the current slide and check the next slide
+                currentSlide.prop("checked", false);
+                nextSlide.prop("checked", true);
+    
+            }, 8000);
+    
+            // Your scroll-related code here
+            $(window).on('scroll', function (event) {
+                // Example: Log the scroll position
+                console.log("Page scrolled");
+            });
+        });
+    </script>
 {% endblock %}

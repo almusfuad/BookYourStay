@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
 from . models import Hotel, Review
 from booking.models import Booking
@@ -36,11 +36,10 @@ class HotelDetailsView(DetailView):
             
             if self.request.user.is_authenticated:
                   student = self.request.user.student
-                  context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = student).exists()
-                  context['review_owner'] = Review.objects.filter(hotel=hotel, student=student).exists()
-                  return context
-            else:
+                  context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = student).exists()   
+                  context['review_owner'] = Review.objects.filter(hotel=hotel, student=student).exists()     # with exists() we get the boolean value
                   context['reviews'] = Review.objects.filter(hotel = hotel)
+                  context['edit_review'] = Review.objects.filter(hotel=hotel, student=student)
                   context['review_form'] = ReviewForm(user = self.request.user)
                   return context
       
@@ -75,4 +74,30 @@ class HotelDetailsView(DetailView):
                   print(review_form.errors)
                   messages.error(request, 'Error submitting the review. Please check your input.')
                   return redirect('hotel:hotel_detail', slug = hotel_instance.slug)
+  
+  
                         
+# TODO: Make a class based view where user can edit, update and delete review which is owned by them
+
+
+class ReviewEditView(UpdateView):
+      model = Review
+      slug_field = 'slug'
+      slug_url_kwarg = 'slug'
+      form_class = ReviewForm
+      
+      
+      def get_context_data(self, **kwargs):
+            super().get_context_data(**kwargs)
+            review = self.get_object()
+      
+            if self.request.user.is_authenticated():
+                  context = super().get_context_data(**kwargs)
+                  context['review_edit'] = get_object_or_404(Review, hotel = review.hotel, student = self.request.user.student)
+            return context
+      
+      def put(self, request, *args, **kwargs):
+            return self.post(request, *args, **kwargs)
+      
+      def get_success_url(self):
+            return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})

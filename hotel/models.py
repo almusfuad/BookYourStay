@@ -39,6 +39,12 @@ class Review(models.Model):
       student = models.ForeignKey(Student, related_name='reviews', on_delete=models.CASCADE)
       rating = models.CharField(choices=RATING_CHOICES, max_length=15)
       review = models.TextField()
+      slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
+      
+      def save(self, *args, **kwargs):
+            if not self.slug:
+                  self.slug = slugify(f"{self.hotel.name}-{self.student.user.username}")
+            super().save(*args, **kwargs)
       
       def __str__(self):
             return self.hotel.name + ' - ' + self.student.user.username

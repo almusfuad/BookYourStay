@@ -3,7 +3,7 @@
 {% block content %}
     <div class="blog-w3l py-5">
         <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle text-center text-bl font-weight-bold">{{ hotel.name }} Details</h3>
+            <h3 class="tittle text-center text-bl font-weight-bold">{{ hotel.name }}</h3>
             <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">{{ hotel.address }}</p>
 
             <div class="blog_section px-lg-5">
@@ -52,16 +52,16 @@
                                 <div class="form-group d-flex flex-column">
                                     <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 col-form-label" style="color: #212529;">Rating: </label>
                                     <div class="col-4">
-                                        <select 
-                                        class="p-2" 
-                                        style="width: 100%; border: 1px solid rgb(182, 178, 178);" id="" 
-                                        name="rating"
-                                        >
-                                            <option value="1">1 star</option>
-                                            <option value="2">2 stars</option>
-                                            <option value="3">3 stars</option>
-                                            <option value="4">4 stars</option>
-                                            <option value="5">5 stars</option>
+                                        <select class="form-control p-2" 
+                                                style="border: 1px solid rgb(182, 178, 178);" 
+                                                id="rating" 
+                                                name="rating"
+                                            >
+                                            <option value="*">1 star</option>
+                                            <option value="**">2 stars</option>
+                                            <option value="***">3 stars</option>
+                                            <option value="****">4 stars</option>
+                                            <option value="*****">5 stars</option>
                                         </select>
                                     </div>
                                 </div>
@@ -70,11 +70,11 @@
                                     <label for="{{ review_form.review.id_for_label }}" style="color: #212529;" class="col-sm-2 col-form-label">Review: </label>
                                     <div class="col-12">
                                         <textarea 
-                                            class="textarea"
+                                            class="form-control"
                                             rows="3"
                                             style="width: 100%; height:100px; border: 1px solid rgb(182, 178, 178);" 
                                             type="text"
-                                            id="{{ review_form.review.id_for_label }}" 
+                                            id="review" 
                                             name = 'review'    
                                         >
                                         </textarea>
@@ -94,7 +94,7 @@
                                     <div class="d-flex justify-content-between">
                                         <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
                                         
-                                        <div style="margin-right: 50px;">
+                                        <div style="margin-right: 30px;">
                                             {% for _ in review.rating %}
                                                 <span style="margin-left: 5px; color: rgb(159, 159, 55);">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -108,15 +108,46 @@
                                 </div>
                                 {% if review_owner %}
                                 <div>
-                                    <form action="" method="get">
-                                        <button class="btn text-white" style="background-color: #17181B;">Edit</button>
-                                    </form>
+                                    <button class="btn text-white" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal">Edit</button>
                                 </div>
                                 {% endif %}
                             </div>
                         {% endfor %}
-                
+                <!-- Modal -->
+                <div class="modal" tabindex="-1" role="dialog" id="editModal">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #17181B; color: #EEEEEE;">
+                        <h5 class="modal-title">Edit Review</h5>
+                        <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                            <label for="editInput" style="color: #17181B;">Input Review:</label>
+                            <input type="text" class="form-control" id="editInput" placeholder="Enter edited review" value="{{edit_review.review}}">
+                            </div>
+                        </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            // Show the modal when the "Edit" button is clicked
+            $('.edit-btn').on('click', function () {
+                $('#editModal').modal('show');
+            });
+        });
+    </script>
 {% endblock %}
