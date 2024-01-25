@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -7,22 +8,22 @@
     <div class="container py-xl-5 py-lg-3">
         <h3 class="tittle text-center text-bl font-weight-bold">Login Form</h3>
         <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome back! Log in to your account.</p>
-        <div class="comment-top mt-5">
-            <div class="comment-bottom mobamuinfo_mail_grid_right">
-                <form method="post" action="{% url 'student:login' %}" enctype="multipart/form-data">
+        <div class="comment-top mt-5 mb-0" >
+            <div class="comment-bottom mobamuinfo_mail_grid_right col-12 d-flex justify-content-center align-items-center">
+                <form method="post" action="{% url 'student:login' %}" enctype="multipart/form-data" class="col-6">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-6 form-group">
+                        <div class="col-12 form-group">
                             <label for="{{ form.username.id_for_label }}">Username</label>
                             {{ form.username }}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 form-group d-flex flex-column">
+                        <div class="col-12 form-group d-flex flex-column">
                             <label for="{{ form.password.id_for_label }}">Password</label>
                             <input 
                             name = 'password'
-                            class="p-2" 
+                            class="p-2 form-group" 
                             type="password" 
                             id="{{ form.password.id_for_label }}"
                             style="border: 1px solid rgb(182, 178, 178);"
@@ -31,6 +32,9 @@
                     </div>
                     <button type="submit" class="btn submit mt-3">Login</button>
                 </form>
+                <div class="col-6">
+                    <img src="{% static 'Login-amico.png' %}" alt="" class="img-fluid" style="height: 50%; width: 80%;">
+                </div>
             </div>
         </div>
     </div>

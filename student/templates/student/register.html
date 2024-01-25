@@ -9,7 +9,7 @@
         <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Let's every journey find a home!</p>
         <div class="comment-top mt-5">
             <div class="comment-bottom mobamuinfo_mail_grid_right">
-                <form method="post" action="{% url 'student:register' %}">
+                <form method="post" action="{% url 'student:register' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-6 form-group">

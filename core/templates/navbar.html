@@ -7,7 +7,7 @@
                   </div>
                   <!-- //logo -->
                   <!-- nav -->
-                  <div class="nav_w3ls">
+                  <div class="total-navbar">
                         <nav>
                               <label for="drop" class="toggle">Menu</label>
                               <input type="checkbox" id="drop" />
@@ -38,15 +38,9 @@
 </header>
 
 {% if request.path != '/' %}
-<!-- banner -->
-<div class="banner_w3lspvt-2">
+<div class="banner_w3lspvt-2" style="height: 100px;">
 
 </div>
-<!-- //banner -->
-</div>
-<!-- //main banner -->
-
-<!-- page details -->
 <div class="breadcrumb-mobamu">
       <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -54,21 +48,6 @@
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{request.path}}</li>
       </ol>
-</div>
-<!-- //page details -->
-
-<!-- banner bottom -->
-<div class="banner-bottom py-5">
-      <div class="d-md-flex container py-xl-3 py-lg-3">
-            <div class="banner-left-bottom-w3ls">
-                  <h6 class="text-wh let">Easiest way to book Hotels and Rooms</h6>
-                  <h3 class="text-wh my-3">Welcome to BookYourStay</h3>
-                  <p>Enjoy Your Every Day and Night when you outside of your home.<br></p>
-            </div>
-            <div class="button offset-lg-2 offset-md-1">
-                  <a href="" class="btn w3ls-button-mobamu">Read More</a>
-            </div>
-      </div>
 </div>
 
 {% endif %}

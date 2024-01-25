@@ -60,39 +60,42 @@
 
 
 <div class="rooms-w3ls bg-li py-5" id="price">
-      <div class="container-fluid py-xl-5 py-lg-3">
-          <h3 class="tittle text-center text-bl font-weight-bold">Available Hotels</h3>
-          <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
-          
-          <div class="row">
-              {% for hotel in hotels %}
-                  <div class="col-lg-4 price-mobamus gap-2" style="height: 600px">
-                      <div class="price-top">
-                          <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
-                              <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
-                          </a>
-                      </div>
-                      <div class="price-w3ls-bottom p-4">
-                          <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank">{{ hotel.name }}</a></h4>
-                          <div class="lm-item-price">
-                              <h6>
-                                  <span class="price-top-head">$</span>
-                                  <span class="price-midd-head">{{ hotel.price }}</span>
-                                  <span class="price-right-head">/ per day</span>
-                              </h6>
-                          </div>
-                          <ul class="style-lists">
-                              {% for facility in hotel.facilities.all|slice:"3" %}
-                                  <li>{{ facility.name }}</li>
-                              {% endfor %}
-                          </ul>
-                          <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
-                      </div>
-                  </div>
-              {% endfor %}
-          </div>
-      </div>
-  </div>
+    <div class="container-fluid py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold">Available Hotels</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
+
+        <div class="row">
+            {% for hotel in hotels %}
+                <div class="col-lg-4 mb-4">
+                    <div class="price-mobamus mx-2" style="height: 680px; background-color: #EEEEEE; border-radius: 5px;">
+                        <div class="price-top">
+                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
+                                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
+                            </a>
+                        </div>
+                        <div class="price-w3ls-bottom p-4">
+                            <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank">{{ hotel.name }}</a></h4>
+                            <div class="lm-item-price">
+                                <h6>
+                                    <!-- <span class="price-top-head">$</span> -->
+                                    <span class="price-midd-head">$ {{ hotel.price }}</span>
+                                    <span class="price-right-head">/ per day</span>
+                                </h6>
+                            </div>
+                            <ul class="style-lists">
+                                {% for facility in hotel.facilities.all|slice:"3" %}
+                                    <li>{{ facility.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 
 
   <!-- reviews -->
@@ -160,7 +163,7 @@
             $(window).on('scroll', function (event) {
                 // Example: Log the scroll position
                 console.log("Page scrolled");
-            });
+            }, {passive: true});
         });
     </script>
 {% endblock %}
