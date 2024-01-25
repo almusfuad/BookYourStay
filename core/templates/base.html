@@ -18,9 +18,9 @@
 	<title>
 		{% block title %} {% endblock %}
 	</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
 	<!-- Custom-Files -->
-	<!-- <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	<!-- Bootstrap-Core-CSS -->
 	<link href="{% static 'css/css_slider.css' %}" type="text/css" rel="stylesheet" media="all">
 	<!-- banner slider -->
@@ -37,17 +37,17 @@
 
 <body>
 	{% block header %}
-	{% include 'messages.html' %}
 	{% include 'navbar.html' %}
+	{% include 'messages.html' %}
 	{% endblock %}
 	{% block content %}{% endblock %}
 	{% include 'footer.html' %}
 
 	<!-- script section -->
 	<!-- Bootstrap JS and Popper.js -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 	<script>
 		// Close Bootstrap alert after 2000 milliseconds (2 seconds)
 		setTimeout(function () {

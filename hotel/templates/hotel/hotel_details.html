@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}{{hotel.name}} - Details{% endblock %}
 {% block content %}
-    <div class="blog-w3l py-5">
+    <div class="blog-w3l py-5" style="background-color: #443937;">
         <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle text-center text-bl font-weight-bold">{{ hotel.name }}</h3>
+            <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">{{ hotel.name }}</h3>
             <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">{{ hotel.address }}</p>
 
-            <div class="blog_section px-lg-5">
+            <div class="blog_section px-lg-5" >
                 <div class="card border-0">
                     <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid">
-                    <div class="card-body p-0 py-4">
+                    <div class="card-body px-3 py-4">
                         <div class="row border-bottom pb-3">
                             <div class="col-sm-6 col-4 perso-wthree">
                                 <h6 class="blog-first text-bl">
@@ -23,8 +23,8 @@
                             </div>
                         </div>
 
-                        <p class="my-3">Facilities:</p>
-                        <ul class="style-lists">
+                        <p class="my-3" >Facilities:</p>
+                        <ul class="style-lists" >
                             {% for facility in hotel.facilities.all %}
                                 <li>{{ facility.name }}</li>
                             {% endfor %}
@@ -87,9 +87,10 @@
                     {% endif %}
 
 
-                        <p class="my-3">Reviews:</p>
+                        <p class="my-3">Reviews: {{reviews|length}}</p>
                         {% for review in reviews %}
-                            <div class="media mt-3 col-8 p-4" style="background-color: #EEEEEE; border-radius: 5px;">
+                            <div class="media mt-3 col-8 p-4" style="background-color: #EEEEEE; border-radius: 5px;" id="
+                            review-{{review.slug}}">
                                 <div class="media-body pt-xl-2 pl-3">
                                     <div class="d-flex justify-content-between">
                                         <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
@@ -108,7 +109,11 @@
                                 </div>
                                 {% if review_owner %}
                                 <div>
-                                    <button class="btn text-white" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal">Edit</button>
+                                    <button class="btn text-white" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal"
+                                    data-review-slug="{{ review.slug }}"
+                                    data-rating="{{ review.rating }}"
+                                    data-review="{{ review.review }}"
+                                    >Edit</button>
                                 </div>
                                 {% endif %}
                             </div>
@@ -166,7 +171,7 @@
                         
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary save-changes-btn">Save changes</button>
                         </div>
                     </div>
                     </div>
@@ -175,11 +180,39 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function () {
-            // Show the modal when the "Edit" button is clicked
+            // Show the modal and populate fields when the "Edit" button is clicked
             $('.edit-btn').on('click', function () {
+                var reviewSlug = $(this).data('review-slug');
+                var rating = $(this).data('rating');
+                var reviewText = $(this).data('review');
+    
+                // Populate modal fields
+                $('#editModal').find('#rating').val(rating);
+                $('#editModal').find('#review').val(reviewText);
+    
+                // Set review ID as a data attribute for the Save changes button
+                $('#editModal').find('.save-changes-btn').data('review-slug', reviewSlug);
+    
+                // Show the modal
                 $('#editModal').modal('show');
+            });
+    
+            // Handle the "Save changes" button click
+            $('.save-changes-btn').on('click', function () {
+                var reviewSlug = $(this).data('review-slug');
+                var newRating = $('#editModal').find('#rating').val();
+                var newReviewText = $('#editModal').find('#review').val();
+    
+                // Perform the necessary actions, e.g., update the review via AJAX
+                // ...
+    
+                // Close the modal
+                $('#editModal').modal('hide');
             });
         });
     </script>

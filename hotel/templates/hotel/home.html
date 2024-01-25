@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}BookYourStay{% endblock %}
 
 {% block content %}
@@ -58,16 +59,29 @@
 <!-- //banner -->
 </div>
 
+<div class="banner-bottom py-5">
+    <div class="d-md-flex container py-xl-3 py-lg-3">
+        <div class="banner-left-bottom-w3ls">
+            <h6 class="text-wh let">Easiest way to book Hotels and Rooms</h6>
+            <h3 class="text-wh my-3">Welcome to BookYourStay</h3>
+            <p>Enjoy Your Every Day and Night when you outside of your home.<br></p>
+        </div>
+        <div class="button offset-lg-2 offset-md-1">
+            <a href="" class="btn w3ls-button-mobamu">Read More</a>
+        </div>
+    </div>
+</div>
 
-<div class="rooms-w3ls bg-li py-5" id="price">
+
+<div class="rooms-w3ls bg-li py-5" id="price" style="background-color: #443937;">
     <div class="container-fluid py-xl-5 py-lg-3">
-        <h3 class="tittle text-center text-bl font-weight-bold">Available Hotels</h3>
+        <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Available Hotels</h3>
         <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
 
         <div class="row">
             {% for hotel in hotels %}
                 <div class="col-lg-4 mb-4">
-                    <div class="price-mobamus mx-2" style="height: 680px; background-color: #EEEEEE; border-radius: 5px;">
+                    <div class="price-mobamus mx-2" style="height: 680px; background-color: #b5d1de; border-radius: 5px;">
                         <div class="price-top">
                             <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
                                 <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
@@ -96,20 +110,40 @@
     </div>
 </div>
 
+<!-- about -->
+<section class="about py-5" id="about">
+    <div class="container py-xl-5 py-lg-3">
+        <div class="row py-md-5">
+            <div class="col-lg-4 about-left-w3pvt offset-lg-1 mt-lg-4">
+                <div class="main-img">
+                    <img src="{% static 'images/bg2.jpg' %}" alt="" class="img-fluid pos-aboimg">
+                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
+                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7 about-right offset-xl-1">
+                <h4 class="sub-tittle-w3layouts let">About Us</h4>
+                <h3 class="tittle-w3layouts text-uppercase pr-lg-5 mt-2">Every Journey Finds a Home</h3>
+                <p class="mt-4 mb-4">At BookYourStay, we are not just a booking site; we are your travel companion, committed to turning every journey into an unforgettable experience. Join us in exploring the world one stay at a time. BookYourStay – Where Your Next Adventure Begins!</p>
+                <a href="" class="btn button-style-2 mt-sm-5 mt-4">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 
   <!-- reviews -->
-  <section class="team-main-sec bg-li py-5" id="testi">
+  <section class="team-main-sec bg-li py-5" id="testi" style="background-color: #443937;">
       <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle text-center text-bl font-weight-bold">Our Guests Love Us</h3>
+            <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Our Guests Love Us</h3>
             <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
             <div class="row text-center">
     
                 {% for review in reviews %}
-                <div class="col-lg-4 col-md-6 team-gd-info">
+                <div class="col-lg-4 col-md-6 team-gd-info" >
                     <div class="team-gd">
                         
-                        <div class="team-info">
+                        <div class="team-info" style="background-color: #b5d1de; border-radius: 10px;">
                             <div class="team-img mb-4">
                                 {% if review.student.image %}
                                 <img src="{{ review.student.image }}" alt="reviewer image" style="height: 100px; width: 100px;">
@@ -135,35 +169,47 @@
         </div>
   </section>
 
+  <!-- newsletter -->
+	<div class="newsletter_w3w3pvt py-5">
+		<div class="container py-xl-5 py-lg-3">
+			<h3 class="tittle text-center text-bl font-weight-bold">Subscribe Newsletter</h3>
+			<p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Embark on a journey of discovery with our newsletter – where each word is a step into the extraordinary. Subscribe now and unlock a world of inspiration, where the beauty of each sentence is as captivating as the destinations we explore. Join us, and let the artistry of travel unfold in your inbox. Because in every line, there's an adventure waiting to be discovered.</p>
+			<div class="newsletter">
+				<form action="#" method="post">
+					<div class="form-group mb-0 w-100">
+						<input class="email" type="email" name="email" placeholder="Your email..." required="">
+					</div>
+					<button type="submit" class="btn">Subscribe</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
         $(document).ready(() => {
-            setInterval(() => {
-                // check the current slide
+            // Function to automatically switch carousel slides
+            function autoSlide() {
                 var currentSlide = $("input[name='slides']:checked");
-    
-                // find the next radio input using :checked selector
                 var nextSlide = currentSlide.closest('li').next('li').find("input[name='slides']");
-    
-                // if there is no next slide, go back to the first one
+                
                 if (nextSlide.length === 0) {
                     nextSlide = $('input[name="slides"]:first');
                 }
-    
-                // uncheck the current slide and check the next slide
+                
                 currentSlide.prop("checked", false);
                 nextSlide.prop("checked", true);
+            }
     
-            }, 8000);
+            // Set interval for automatic sliding
+            setInterval(autoSlide, 8000);
     
-            // Your scroll-related code here
-            $(window).on('scroll', function (event) {
-                // Example: Log the scroll position
-                console.log("Page scrolled");
-            }, {passive: true});
+            // Trigger the first slide manually (optional)
+            autoSlide();
         });
     </script>
+    
 {% endblock %}

@@ -8,5 +8,5 @@ urlpatterns = [
       path('activate/<str:uid64>/<str:token>/', views.activate, name='activate'),
       path('login/', views.CustomLoginView.as_view(), name = 'login'),
       path('logout/', views.custom_logout, name = 'logout'),
-      path('profile/', views.ProfileUpdateView.as_view(), name = 'profile'),
+      path('profile/', views.student_info, name = 'profile'),
 ]

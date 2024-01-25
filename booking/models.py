@@ -10,6 +10,8 @@ class Booking(models.Model):
       departure_date = models.DateField()
       room_type = models.CharField(choices=(('S', 'Single'), ('D', 'Double'), ('F', 'Family')), max_length=10)
       no_of_guests = models.IntegerField()
+      is_check_out = models.BooleanField(default=False, blank=True)
+      is_cancel = models.BooleanField(default=False, blank=True)
       
       def __str__(self):
             return self.hotel.name + ' - ' + self.student.user.username

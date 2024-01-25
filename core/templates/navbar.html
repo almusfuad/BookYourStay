@@ -7,16 +7,19 @@
                   </div>
                   <!-- //logo -->
                   <!-- nav -->
-                  <div class="total-navbar">
+                  <div class="nav_w3ls">
                         <nav>
                               <label for="drop" class="toggle">Menu</label>
                               <input type="checkbox" id="drop" />
                               <ul class="menu">
+                                    {% if user.is_authenticated %}
+                                    <li class="text-white mx-2">Balance: {{user.student.balance}}</li>
+                                    {% endif %}
                                     <li><a href="{% url 'hotel:home' %}" class="active">Home</a></li>
                                     {% if user.is_authenticated %}
                                           <li>
                                                
-                                                <a href="">Profile <span class="fa fa-angle-down"
+                                                <a href="">Profile <span 
                                                             aria-hidden="true"></span></a>
                                                 <input type="checkbox" id="drop-2" />
                                                 <ul>

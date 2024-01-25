@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Deposit Form{% endblock %}
 
 {% block content %}
 <div class="register-w3 py-5">
-    <div class="container py-xl-5 py-lg-3">
+    <div class="container py-xl-5 py-lg-3 d-flex flex-column align-items-center">
         <h3 class="tittle text-center text-bl font-weight-bold">Deposit Form</h3>
-        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Deposit money to your account.</p>
-        <div class="comment-top mt-5">
-            <div class="comment-bottom mobamuinfo_mail_grid_right">
-                <form method="post" action="{% url 'transaction:deposit' %}">
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">We offer the best security of your money.</p>
+        <div class="comment-top mt-5 w-75">
+            <div class="comment-bottom mobamuinfo_mail_grid_right d-flex justify-content-between align-items-center">
+                <form method="post" action="{% url 'transaction:deposit' %}" class="col-6">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-6 form-group">
+                        <div class="col-12 form-group">
                             <label for="{{ form.amount.id_for_label }}">Amount</label>
                             <input 
                             type="number" 
@@ -24,6 +25,9 @@
                     </div>
                     <button type="submit" class="btn submit mt-3">Deposit</button>
                 </form>
+                <div class="col-6">
+                    <img src="{% static 'Vault-rafiki.png' %}" alt="" class="col-12 h-75">
+                </div>
             </div>
         </div>
     </div>

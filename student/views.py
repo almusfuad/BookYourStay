@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
+from booking.models import Booking
 from .forms import RegistrationForm, StudentProfileForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
@@ -153,12 +154,22 @@ def custom_logout(request):
 #     # Handle GET requests if needed
 #     return redirect('student:login')
 
+@login_required
+def student_info(request):
+      try:
+            student = Student.objects.get(user = request.user)
+            bookings = Booking.objects.filter(student = student)
+      except Student.DoesNotExist:
+            raise Http404("Student does not exist")
+      
+      return render(request, 'student/profile.html', {'student': student, 'bookings': bookings})
+
 
 @method_decorator(login_required, name = 'dispatch') 
 class ProfileUpdateView(UpdateView):
       model = Student
       form_class = StudentProfileForm
-      template_name = 'student/profile.html'
+      template_name = 'student/update_info.html'
       success_url = reverse_lazy('student:profile')
 
       def get_object(self, queryset=None):
@@ -166,7 +177,6 @@ class ProfileUpdateView(UpdateView):
 
       def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            context['student'] = self.request.user.student
             context['update'] = self.get_object()
             return context
 

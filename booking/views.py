@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from django.views.generic.edit import CreateView
 from . models import Booking
 from . forms import BookingForm
@@ -80,3 +81,21 @@ class BookingCreateView(CreateView):
     def get_hotel(self):
         hotel_slug = self.kwargs.get('hotel_slug')
         return get_object_or_404(Hotel, slug=hotel_slug)
+    
+    
+    def cancel_booking(request, booking_id):
+        booking = get_object_or_404(Booking, id = booking_id)
+        
+        if booking.arrival_date > timezone.now().date():
+            if not booking.is_check_out and not booking.is_cancel:
+                booking.is_cancel = True
+                booking.save()
+                
+                request.user.student.balance += hotel.price
+                
+                Transaction.objects.create(
+                    student = request.user.student,
+                    amount = booking.hotel.price,
+                    type = 'R',
+                )
+        return redirect('student:profile')
