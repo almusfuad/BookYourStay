@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView
 from . models import Hotel, Review
 from booking.models import Booking
 from student.models import Student
-from . forms import ReviewForm
+from . forms import ReviewForm, EditReviewForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
@@ -83,24 +83,15 @@ class HotelDetailsView(DetailView):
 # TODO: Make a class based view where user can edit, update and delete review which is owned by them
 
 
-class ReviewEditView(UpdateView):
-      model = Review
-      slug_field = 'slug'
-      slug_url_kwarg = 'slug'
-      form_class = ReviewForm
+def edit_review(request, slug):
+      review = get_object_or_404(Review, slug=slug)
       
-      
-      def get_context_data(self, **kwargs):
-            super().get_context_data(**kwargs)
-            review = self.get_object()
-      
-            if self.request.user.is_authenticated():
-                  context = super().get_context_data(**kwargs)
-                  context['review_edit'] = get_object_or_404(Review, hotel = review.hotel, student = self.request.user.student)
-            return context
-      
-      def put(self, request, *args, **kwargs):
-            return self.post(request, *args, **kwargs)
-      
-      def get_success_url(self):
-            return reverse_lazy('hotel:hotel_detail', kwargs={'slug': self.object.hotel.slug})
+      if request.method == 'POST':
+            form = EditReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                  form.save()
+                  messages.success(request, 'Your review has been updated.')
+            else:
+                  messages.error(request, 'Your review has not been updated.')
+                  
+      return redirect('hotel:hotel_detail', slug = review.hotel.slug)

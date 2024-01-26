@@ -32,3 +32,13 @@ class ReviewForm(forms.ModelForm):
             print('print after clean in forms.py')
             cleaned_data = super().clean()
             return cleaned_data
+      
+      
+class EditReviewForm(forms.ModelForm):
+      class Meta:
+            model = Review
+            fields = ['rating', 'review']
+            widgets = {
+                  'rating': forms.Select(attrs={'class': 'form-control p-2'}),
+                  'review': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            }

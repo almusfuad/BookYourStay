@@ -72,25 +72,9 @@
 </div>
 
 <!-- about -->
-<section class="about py-5" id="about">
-    <div class="container py-xl-5 py-lg-3">
-        <div class="row py-md-5">
-            <div class="col-lg-4 about-left-w3pvt offset-lg-1 mt-lg-4">
-                <div class="main-img">
-                    <img src="{% static 'images/bg2.jpg' %}" alt="" class="img-fluid pos-aboimg">
-                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
-                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-7 about-right offset-xl-1">
-                <h4 class="sub-tittle-w3layouts let">About Us</h4>
-                <h3 class="tittle-w3layouts text-uppercase pr-lg-5 mt-2">Every Journey Finds a Home</h3>
-                <p class="mt-4 mb-4">At BookYourStay, we are not just a booking site; we are your travel companion, committed to turning every journey into an unforgettable experience. Join us in exploring the world one stay at a time. BookYourStay – Where Your Next Adventure Begins!</p>
-                <a href="" class="btn button-style-2 mt-sm-5 mt-4">Read More</a>
-            </div>
-        </div>
-    </div>
-</section>
+<div id="about-section">
+    {% include 'about.html' %}
+</div>
 
 
 <div class="rooms-w3ls bg-li py-5" id="price" style="background-color: #443937;">

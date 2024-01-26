@@ -117,8 +117,9 @@
                                 </div>
                                 {% endif %}
                             </div>
-                        {% endfor %}
-                <!-- Modal -->
+
+
+                            <!-- Modal for update review-->
                 <div class="modal" tabindex="-1" role="dialog" id="editModal">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -129,7 +130,7 @@
                         </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="">
+                            <form method="post" action="{% url 'hotel:edit_review' slug=review.slug %}">
                                 {% csrf_token %}
                                 <div class="form-group d-flex flex-column">
                                     <label for="rating" class="col-sm-2 col-form-label" style="color: #212529;">Rating: </label>
@@ -140,11 +141,11 @@
                                                 name="rating"
                                             >
                                             
-                                            <option value="*">1 star</option>
-                                            <option value="**">2 stars</option>
-                                            <option value="***">3 stars</option>
-                                            <option value="****">4 stars</option>
-                                            <option value="*****">5 stars</option>
+                                            <option value="*"{% if review.rating == '*' %} selected{% endif %}>1 star</option>
+                                            <option value="**"{% if review.rating == '**' %} selected{% endif %}>2 stars</option>
+                                            <option value="***"{% if review.rating == '***' %} selected{% endif %}>3 stars</option>
+                                            <option value="****"{% if review.rating == '****' %} selected{% endif %}>4 stars</option>
+                                            <option value="*****"{% if review.rating == '*****' %} selected{% endif %}>5 stars</option>
                                             
                                         </select>
                                     </div>
@@ -160,22 +161,27 @@
                                             type="text"
                                             id="review" 
                                             name="review"    
-                                        >{{ edit_review.review }}
+                                        >{{ review.review }}
                                         </textarea>            
                                     </div>
                                 </div>
                                 <!-- Add a submit button if needed -->
-                                <!-- <button type="submit" style="background-color: #17181B; color: white" class="btn mt-3 ms-2">Submit Review</button> -->
+                                <button type="submit" style="background-color: #17181B; color: white" class="btn mt-3 ms-2">Submit Review</button>
                             </form>
                         </div>
                         
-                        <div class="modal-footer">
+                        <!-- <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary save-changes-btn">Save changes</button>
-                        </div>
+                        </div> -->
                     </div>
                     </div>
                 </div>
+                        {% endfor %}
+
+
+
+                
             </div>
         </div>
     </div>
