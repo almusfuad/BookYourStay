@@ -91,11 +91,14 @@
                         {% for review in reviews %}
                             <div class="media mt-3 col-8 p-4" style="background-color: #EEEEEE; border-radius: 5px;" id="
                             review-{{review.slug}}">
-                                <div class="media-body pt-xl-2 pl-3">
+                                <div class="media-body pt-xl-2 pl-3 mr-3">
                                     <div class="d-flex justify-content-between">
-                                        <h5 class="mb-2">{{ review.student.user.get_full_name }}</h5>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ review.student.image.url }}" alt="Reviewer Image" style="height: 30px; width:30px; border-radius: 50%; margin-bottom: 2px;">
+                                            <h5 class="ml-2">{{ review.student.user.get_full_name }}</h5>
+                                        </div>
                                         
-                                        <div style="margin-right: 30px;">
+                                        <div style="margin-right: 15px;">
                                             {% for _ in review.rating %}
                                                 <span style="margin-left: 5px; color: rgb(159, 159, 55);">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -108,12 +111,13 @@
                                     <p>{{ review.review }}</p>
                                 </div>
                                 {% if review_owner %}
-                                <div>
-                                    <button class="btn text-white" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal"
+                                <div class="d-flex flex-column align-items-center">
+                                    <button class="btn text-white mb-3 px-4" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal"
                                     data-review-slug="{{ review.slug }}"
                                     data-rating="{{ review.rating }}"
                                     data-review="{{ review.review }}"
                                     >Edit</button>
+                                    <a href="{% url 'hotel:delete_review' slug=review.slug %}" class="btn btn-danger text-white" >Delete</a>
                                 </div>
                                 {% endif %}
                             </div>

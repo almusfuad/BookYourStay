@@ -82,7 +82,7 @@ class HotelDetailsView(DetailView):
                         
 # TODO: Make a class based view where user can edit, update and delete review which is owned by them
 
-
+@login_required
 def edit_review(request, slug):
       review = get_object_or_404(Review, slug=slug)
       
@@ -94,4 +94,18 @@ def edit_review(request, slug):
             else:
                   messages.error(request, 'Your review has not been updated.')
                   
+      return redirect('hotel:hotel_detail', slug = review.hotel.slug)
+
+
+@login_required
+def delete_review(request, slug):
+      review = get_object_or_404(Review, slug=slug)
+      
+      # check user permissions
+      if request.user == review.student.user:
+            review.delete()
+            messages.success(request, 'Your review has been deleted.')
+      else:
+            messages.error(request, 'You do not have permission to delete this review.')
+      
       return redirect('hotel:hotel_detail', slug = review.hotel.slug)
