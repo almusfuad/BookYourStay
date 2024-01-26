@@ -2,63 +2,61 @@
 {% load static %}
 {% block title %}BookYourStay{% endblock %}
 
-{% block content %}
-<!-- banner -->
+{% block slider %}
 <div class="banner_w3lspvt">
     <div class="csslider infinity" id="slider1">
-          <input type="radio" name="slides" checked="checked" id="slides_1" />
-          <input type="radio" name="slides" id="slides_2" />
-          <input type="radio" name="slides" id="slides_3" />
-          <input type="radio" name="slides" id="slides_4" />
-          <ul class="banner_slide_bg">
-                <li>
-                      <div class="container">
-                            <div class="w3ls_banner_txt">
-                                  <p>Welcome to BookYourStay</p>
-                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
-                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                            </div>
-                      </div>
-                </li>
-                <li>
-                      <div class="container">
-                            <div class="w3ls_banner_txt">
-                                  <p>Welcome to BookYourStay</p>
-                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
-                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                            </div>
-                      </div>
-                </li>
-                <li>
-                      <div class="container">
-                            <div class="w3ls_banner_txt">
-                                  <p>Welcome to BookYourStay</p>
-                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
-                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                            </div>
-                      </div>
-                </li>
-                <li>
-                      <div class="container">
-                            <div class="w3ls_banner_txt">
-                                  <p>Welcome to BookYourStay</p>
-                                  <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
-                                  <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                            </div>
-                      </div>
-                </li>
-          </ul>
-          <div class="arrows">
-                <label for="slides_1"></label>
-                <label for="slides_2"></label>
-                <label for="slides_3"></label>
-                <label for="slides_4"></label>
-          </div>
+        <input type="radio" name="slides" checked="checked" id="slides_1" />
+        <input type="radio" name="slides" id="slides_2" />
+        <input type="radio" name="slides" id="slides_3" />
+        <input type="radio" name="slides" id="slides_4" />
+        <ul class="banner_slide_bg">
+            <li>
+                <div class="container">
+                    <div class="w3ls_banner_txt">
+                        <p>Welcome to BookYourStay</p>
+                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
+                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <div class="w3ls_banner_txt">
+                        <p>Welcome to BookYourStay</p>
+                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
+                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <div class="w3ls_banner_txt">
+                        <p>Welcome to BookYourStay</p>
+                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
+                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <div class="w3ls_banner_txt">
+                        <p>Welcome to BookYourStay</p>
+                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
+                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="arrows">
+            <label for="slides_1"></label>
+            <label for="slides_2"></label>
+            <label for="slides_3"></label>
+            <label for="slides_4"></label>
+        </div>
     </div>
 </div>
-<!-- //banner -->
-</div>
-
+{% endblock %}
+{% block content %}
 <div class="banner-bottom py-5">
     <div class="d-md-flex container py-xl-3 py-lg-3">
         <div class="banner-left-bottom-w3ls">
@@ -71,6 +69,27 @@
         </div>
     </div>
 </div>
+
+<!-- about -->
+<section class="about py-5" id="about">
+    <div class="container py-xl-5 py-lg-3">
+        <div class="row py-md-5">
+            <div class="col-lg-4 about-left-w3pvt offset-lg-1 mt-lg-4">
+                <div class="main-img">
+                    <img src="{% static 'images/bg2.jpg' %}" alt="" class="img-fluid pos-aboimg">
+                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
+                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7 about-right offset-xl-1">
+                <h4 class="sub-tittle-w3layouts let">About Us</h4>
+                <h3 class="tittle-w3layouts text-uppercase pr-lg-5 mt-2">Every Journey Finds a Home</h3>
+                <p class="mt-4 mb-4">At BookYourStay, we are not just a booking site; we are your travel companion, committed to turning every journey into an unforgettable experience. Join us in exploring the world one stay at a time. BookYourStay – Where Your Next Adventure Begins!</p>
+                <a href="" class="btn button-style-2 mt-sm-5 mt-4">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <div class="rooms-w3ls bg-li py-5" id="price" style="background-color: #443937;">
@@ -110,27 +129,77 @@
     </div>
 </div>
 
-<!-- about -->
-<section class="about py-5" id="about">
+
+<!-- why -->
+<div class="serives py-5" id="why">
     <div class="container py-xl-5 py-lg-3">
-        <div class="row py-md-5">
-            <div class="col-lg-4 about-left-w3pvt offset-lg-1 mt-lg-4">
-                <div class="main-img">
-                    <img src="{% static 'images/bg2.jpg' %}" alt="" class="img-fluid pos-aboimg">
-                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
-                    <img src="{% static 'images/bg3.jpg' %}" alt="" class="img-fluid pos-aboimg2">
-                </div>
+        <h3 class="tittle text-center text-bl font-weight-bold">Why BookYourStay </h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Choosing BookYourStay for your travel accommodations is not just a choice; it's a commitment to an unparalleled experience</p>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 ser-grid">
+                <span class="fa fa-cutlery"></span>
+                <h4>Restaurant</h4>
+                <p>Elevate your stay with a culinary journey; where every reservation is an invitation to savor exquisite moments at our distinguished restaurants..</p>
             </div>
-            <div class="col-xl-6 col-lg-7 about-right offset-xl-1">
-                <h4 class="sub-tittle-w3layouts let">About Us</h4>
-                <h3 class="tittle-w3layouts text-uppercase pr-lg-5 mt-2">Every Journey Finds a Home</h3>
-                <p class="mt-4 mb-4">At BookYourStay, we are not just a booking site; we are your travel companion, committed to turning every journey into an unforgettable experience. Join us in exploring the world one stay at a time. BookYourStay – Where Your Next Adventure Begins!</p>
-                <a href="" class="btn button-style-2 mt-sm-5 mt-4">Read More</a>
+            <div class="col-lg-3 col-md-6 ser-grid mt-md-0 mt-5">
+                <span class="fa fa-money"></span>
+                <h4>Low Price</h4>
+                <p>Savor affordability without compromising flavor – where budget meets taste, creating a delightful dining experience for every guest.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 ser-grid mt-lg-0 mt-5">
+                <span class="fa fa-user-secret"></span>
+                <h4>Secure Zone</h4>
+                <p>Experience tranquility in our secure haven, where your comfort and safety take center stage, ensuring peace of mind throughout your stay.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 ser-grid mt-lg-0 mt-5">
+                <span class="fa fa-car"></span>
+                <h4>Pick Up</h4>
+                <p>Convenience at your fingertips — opt for our hassle-free pickup service, bringing the essence of hospitality directly to you.</p>
             </div>
         </div>
     </div>
-</section>
+</div>
+<!-- why -->
 
+
+<!-- services -->
+<div class="serives-mobamu py-5" id="services">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-wh font-weight-bold">Our Services</h3>
+        <p class="sub-tittle text-center text-li mt-2 mb-sm-5 mb-4 pb-xl-3">Elevate your stay with our premium services designed to enhance your hotel booking experience.</p>
+        <div class="row welcome-bottom text-center">
+            <div class="col-lg-3 col-sm-6 px-2">
+                <div class="welcome-grid bg-wh py-5 px-4">
+                    <img src="images/wh1.jpg" alt="" class="img-fluid">
+                    <h4 class="mt-4 mb-3 text-bl">Easy Booking</h4>
+                    <p>Seamless and convenient hotel reservations tailored to your preferences.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt-sm-0 mt-5 px-2">
+                <div class="welcome-grid bg-wh py-5 px-4">
+                    <img src="images/wh2.jpg" alt="" class="img-fluid">
+                    <h4 class="mt-4 mb-3 text-bl">Exclusive Offers</h4>
+                    <p>Unlock special deals and discounts when you book directly through our platform.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2">
+                <div class="welcome-grid bg-wh py-5 px-4">
+                    <img src="images/wh3.jpg" alt="" class="img-fluid">
+                    <h4 class="mt-4 mb-3 text-bl">Personalized Service</h4>
+                    <p>Tailor your stay with personalized services, ensuring a memorable experience.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2">
+                <div class="welcome-grid bg-wh py-5 px-4">
+                    <img src="images/wh4.jpg" alt="" class="img-fluid">
+                    <h4 class="mt-4 mb-3 text-bl">Secure Reservations</h4>
+                    <p>Rest easy knowing your reservations are secured and your information is protected.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //services -->
 
   <!-- reviews -->
   <section class="team-main-sec bg-li py-5" id="testi" style="background-color: #443937;">

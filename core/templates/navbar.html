@@ -15,7 +15,7 @@
                                     {% if user.is_authenticated %}
                                     <li class="text-white mx-2">Balance: {{user.student.balance}}</li>
                                     {% endif %}
-                                    <li><a href="{% url 'hotel:home' %}" class="active">Home</a></li>
+                                    <li><a href="{% url 'hotel:home' %}" class="">Home</a></li>
                                     {% if user.is_authenticated %}
                                           <li>
                                                
