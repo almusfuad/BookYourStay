@@ -4,7 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
 from booking.models import Booking
-from .forms import RegistrationForm, StudentProfileForm
+from .forms import RegistrationForm, StudentUpdateForm, CustomUserChangeView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
@@ -165,26 +165,22 @@ def student_info(request):
       return render(request, 'student/profile.html', {'student': student, 'bookings': bookings})
 
 
-@method_decorator(login_required, name = 'dispatch') 
-class ProfileUpdateView(UpdateView):
-      model = Student
-      form_class = StudentProfileForm
-      template_name = 'student/update_info.html'
-      success_url = reverse_lazy('student:profile')
 
-      def get_object(self, queryset=None):
-            return self.request.user.student
+@login_required
+def update_info(request):
+      if request.method == 'POST':
+            user_form = CustomUserChangeView(request.POST, instance=request.user)
+            student_form = StudentUpdateForm(request.POST, request.FILES, instance=request.user.student)
+            
+            if user_form.is_valid() and student_form.is_valid():
+                  user_form.save()
+                  student_form.save()
+                  messages.success(request, 'Your profile has been updated successfully.')
+            else:
+                  error_messages = "\n".join([f"{field}: {', '.join(errors)}" for field, errors in user_form.errors.items()])
+                  messages.error(request, 'Your profile update failed.')
+                  print(error_messages)
+      else:
+            messages.error(request, 'Invalid request method for profile update.')
 
-      def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['update'] = self.get_object()
-            return context
-
-      def form_valid(self, form):
-            form.instance.user = self.request.user
-            messages.success(self.request, 'Profile updated successfully.')
-            return super().form_valid(form)
-
-      def form_invalid(self, form):
-            messages.error(self.request, 'Profile update failed. Please check your forms.')
-            return super().form_invalid(form)
+      return redirect('student:profile')

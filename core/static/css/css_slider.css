@@ -50,7 +50,7 @@
 
 .csslider>ul {
     position: relative;
-    height: 400px;
+    height: 100vh;
     z-index: 1;
     font-size: 0;
     line-height: 0;

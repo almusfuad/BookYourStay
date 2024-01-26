@@ -1050,7 +1050,9 @@ ul.style-lists li {
 }
 
 .welcome-grid {
+    height: 300px;
     box-shadow: 0 20px 70px -20px rgba(0, 0, 0, 0.34);
+    overflow: hidden;
 }
 
 .welcome-grid h4 {

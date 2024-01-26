@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import Student
 
@@ -34,25 +34,17 @@ class RegistrationForm(UserCreationForm):
                   student.save()
 
             return user
-      
-class StudentProfileForm(forms.ModelForm):
-      readonly_fields = ['account_no', 'balance', ]
+
+
+class CustomUserChangeView(UserChangeForm):
+      password = None
+      class Meta:
+            model = User
+            fields = ['first_name', 'last_name', 'email']
+            
+            
+            
+class StudentUpdateForm(forms.ModelForm):
       class Meta:
             model = Student
-            fields = ['phone', 'country', 'account_no', 'balance', 'image']
-            
-            # additional fields for User Model
-            first_name = forms.CharField(max_length=30, required=True)
-            last_name = forms.CharField(max_length=30, required=True)
-            
-            def __init__(self, *args, **kwargs):
-                  super().__init__(*args, **kwargs)
-                  
-                  
-                  
-                  for field in readonly.fields:
-                        self.fields[field].widget.attrs['readonly'] = True
-                  
-                  if self.instance.user:
-                        self.fields['first_name'].initial = self.instance.user.first_name
-                        self.fields['last_name'].initial = self.instance.user.last_name
+            fields = ['phone', 'country', 'image']

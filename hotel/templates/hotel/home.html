@@ -3,58 +3,59 @@
 {% block title %}BookYourStay{% endblock %}
 
 {% block slider %}
-<div class="banner_w3lspvt">
-    <div class="csslider infinity" id="slider1">
-        <input type="radio" name="slides" checked="checked" id="slides_1" />
-        <input type="radio" name="slides" id="slides_2" />
-        <input type="radio" name="slides" id="slides_3" />
-        <input type="radio" name="slides" id="slides_4" />
-        <ul class="banner_slide_bg">
-            <li>
-                <div class="container">
-                    <div class="w3ls_banner_txt">
-                        <p>Welcome to BookYourStay</p>
-                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
-                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+
+    <div class="banner_w3lspvt">
+        <div class="csslider infinity" id="slider1">
+            <input type="radio" name="slides" checked="checked" id="slides_1" />
+            <input type="radio" name="slides" id="slides_2" />
+            <input type="radio" name="slides" id="slides_3" />
+            <input type="radio" name="slides" id="slides_4" />
+            <ul class="banner_slide_bg">
+                <li>
+                    <div class="container">
+                        <div class="w3ls_banner_txt">
+                            <p>Welcome to BookYourStay</p>
+                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
+                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="container">
-                    <div class="w3ls_banner_txt">
-                        <p>Welcome to BookYourStay</p>
-                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
-                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                </li>
+                <li>
+                    <div class="container">
+                        <div class="w3ls_banner_txt">
+                            <p>Welcome to BookYourStay</p>
+                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
+                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="container">
-                    <div class="w3ls_banner_txt">
-                        <p>Welcome to BookYourStay</p>
-                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
-                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                </li>
+                <li>
+                    <div class="container">
+                        <div class="w3ls_banner_txt">
+                            <p>Welcome to BookYourStay</p>
+                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
+                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="container">
-                    <div class="w3ls_banner_txt">
-                        <p>Welcome to BookYourStay</p>
-                        <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
-                        <a href="about.html" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                </li>
+                <li>
+                    <div class="container">
+                        <div class="w3ls_banner_txt">
+                            <p>Welcome to BookYourStay</p>
+                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
+                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-        <div class="arrows">
-            <label for="slides_1"></label>
-            <label for="slides_2"></label>
-            <label for="slides_3"></label>
-            <label for="slides_4"></label>
+                </li>
+            </ul>
+            <div class="arrows">
+                <label for="slides_1"></label>
+                <label for="slides_2"></label>
+                <label for="slides_3"></label>
+                <label for="slides_4"></label>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 {% block content %}
 <div class="banner-bottom py-5">
@@ -169,29 +170,29 @@
         <p class="sub-tittle text-center text-li mt-2 mb-sm-5 mb-4 pb-xl-3">Elevate your stay with our premium services designed to enhance your hotel booking experience.</p>
         <div class="row welcome-bottom text-center">
             <div class="col-lg-3 col-sm-6 px-2">
-                <div class="welcome-grid bg-wh py-5 px-4">
-                    <img src="images/wh1.jpg" alt="" class="img-fluid">
+                <div class="welcome-grid py-5 px-4" style="background-color: #b5d1de; height: 400px;">
+                    <img src="{% static 'images/wh4.jpg' %}" alt="" class="img-fluid">
                     <h4 class="mt-4 mb-3 text-bl">Easy Booking</h4>
                     <p>Seamless and convenient hotel reservations tailored to your preferences.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 mt-sm-0 mt-5 px-2">
-                <div class="welcome-grid bg-wh py-5 px-4">
-                    <img src="images/wh2.jpg" alt="" class="img-fluid">
+                <div class="welcome-grid py-5 px-4" style="background-color: #b5d1de; height: 400px;">
+                    <img src="{% static 'images/wh3.jpg' %}" alt="" class="img-fluid">
                     <h4 class="mt-4 mb-3 text-bl">Exclusive Offers</h4>
                     <p>Unlock special deals and discounts when you book directly through our platform.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2">
-                <div class="welcome-grid bg-wh py-5 px-4">
-                    <img src="images/wh3.jpg" alt="" class="img-fluid">
+            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2" >
+                <div class="welcome-grid py-5 px-4" style="background-color: #b5d1de; height: 400px;">
+                    <img src="{% static 'images/wh2.jpg' %}" alt="" class="img-fluid">
                     <h4 class="mt-4 mb-3 text-bl">Personalized Service</h4>
                     <p>Tailor your stay with personalized services, ensuring a memorable experience.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2">
-                <div class="welcome-grid bg-wh py-5 px-4">
-                    <img src="images/wh4.jpg" alt="" class="img-fluid">
+                <div class="welcome-grid bg-wh py-5 px-4" style="background-color: #b5d1de; height: 400px;">
+                    <img src="{% static 'images/wh1.jpg' %}" alt="" class="img-fluid">
                     <h4 class="mt-4 mb-3 text-bl">Secure Reservations</h4>
                     <p>Rest easy knowing your reservations are secured and your information is protected.</p>
                 </div>
@@ -215,7 +216,7 @@
                         <div class="team-info" style="background-color: #b5d1de; border-radius: 10px;">
                             <div class="team-img mb-4">
                                 {% if review.student.image %}
-                                <img src="{{ review.student.image }}" alt="reviewer image" style="height: 100px; width: 100px;">
+                                <img src="{{ review.student.image.url }}" alt="reviewer image" style="height: 100px; width: 100px;">
                                 {% endif %}
                             </div>
                             <h3>{{ review.student.user.get_full_name }} <span class="sub-tittle-team">{{ review.student.country }}</span> </h3>
