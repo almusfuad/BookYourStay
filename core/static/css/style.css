@@ -62,7 +62,7 @@ p {
     font-size: 15px;
     letter-spacing: 1px;
     line-height: 1.9;
-    color: #999;
+    color: #443937;
     font-family: 'Oxygen', sans-serif;
 }
 
@@ -939,6 +939,12 @@ h6.text-white {
 
 /* //banner bottom */
 
+/* modal */
+.modal-header{
+    background-color: #17181B; 
+    color: white
+}
+
 /* about */
 .main-img {
     position: relative;
@@ -1144,6 +1150,14 @@ h4.numscroller {
     color: #000;
     font-weight: 600;
     margin: 20px 0 10px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+.ser-grid{
+    /* margin: 2px; */
+    border-radius: 5px; 
+    border: 1px solid #443937;
 }
 
 .ser-grid span {

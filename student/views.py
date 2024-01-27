@@ -4,7 +4,8 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Student
 from booking.models import Booking
-from .forms import RegistrationForm, StudentUpdateForm, CustomUserChangeView
+from .forms import RegistrationForm, StudentUpdateForm, CustomUserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
@@ -169,7 +170,7 @@ def student_info(request):
 @login_required
 def update_info(request):
       if request.method == 'POST':
-            user_form = CustomUserChangeView(request.POST, instance=request.user)
+            user_form = CustomUserChangeForm(request.POST, instance=request.user)
             student_form = StudentUpdateForm(request.POST, request.FILES, instance=request.user.student)
             
             if user_form.is_valid() and student_form.is_valid():
@@ -183,4 +184,18 @@ def update_info(request):
       else:
             messages.error(request, 'Invalid request method for profile update.')
 
+      return redirect('student:profile')
+
+
+@login_required
+def custom_password_change(request):
+      if request.method == 'POST':
+            form = PasswordChangeForm(request.user, request.POST)
+            
+            if form.is_valid():
+                  user = form.save()
+                  messages.success(request, 'Your password has been updated successfully.')
+            else:
+                  messages.error(request, "Password don't match!")
+                  
       return redirect('student:profile')

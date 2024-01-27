@@ -36,7 +36,7 @@ class RegistrationForm(UserCreationForm):
             return user
 
 
-class CustomUserChangeView(UserChangeForm):
+class CustomUserChangeForm(UserChangeForm):
       password = None
       class Meta:
             model = User

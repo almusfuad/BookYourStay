@@ -1,229 +1,234 @@
 {% extends 'base.html' %}
 {% block title %}{{hotel.name}} - Details{% endblock %}
 {% block content %}
-    <div class="blog-w3l py-5" style="background-color: #443937;">
-        <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">{{ hotel.name }}</h3>
-            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">{{ hotel.address }}</p>
+<div class="blog-w3l py-5" style="background-color: #443937;">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">{{ hotel.name }}</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">{{ hotel.address }}</p>
 
-            <div class="blog_section px-lg-5" >
-                <div class="card border-0">
-                    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid">
-                    <div class="card-body px-3 py-4">
-                        <div class="row border-bottom pb-3">
-                            <div class="col-sm-6 col-4 perso-wthree">
-                                <h6 class="blog-first text-bl">
-                                    <span class="fa fa-user mr-2"></span>{{ hotel.name }}
-                                </h6>
-                            </div>
-                            <div class="col-sm-6 col-8 info-commt text-right">
-                                <ul class="blog_list">
-                                    <li>Price: ${{ hotel.price }}</li>
-                                </ul>
-                            </div>
+        <div class="blog_section px-lg-5">
+            <div class="card border-0">
+                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid">
+                <div class="card-body px-3 py-4">
+                    <div class="row border-bottom pb-3">
+                        <div class="col-sm-6 col-4 perso-wthree">
+                            <h6 class="blog-first text-bl">
+                                <span class="fa fa-user mr-2"></span>{{ hotel.name }}
+                            </h6>
                         </div>
-
-                        <p class="my-3" >Facilities:</p>
-                        <ul class="style-lists" >
-                            {% for facility in hotel.facilities.all %}
-                                <li>{{ facility.name }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% if user.is_authenticated %}
-                            {% if not user_has_booked %}
-                                <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
-                            {% endif %}
-                        {% endif %}
-
-                        <!-- Reviews -->
-                        
-                       
-                        
-                        
-                    </div> 
-                </div>
-                {% if user.is_authenticated %}
-                {% if  user_has_booked and not review_owner %}
-                        <div class="col-12">
-                            <hr>
-                            <p class="my-3">Write your Review:</p>
-                            <form method="post" action="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
-                                {% csrf_token %}
-                                <div class="form-group d-flex flex-column">
-                                    <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 col-form-label" style="color: #212529;">Rating: </label>
-                                    <div class="col-4">
-                                        <select class="form-control p-2" 
-                                                style="border: 1px solid rgb(182, 178, 178);" 
-                                                id="rating" 
-                                                name="rating"
-                                            >
-                                            <option value="*">1 star</option>
-                                            <option value="**">2 stars</option>
-                                            <option value="***">3 stars</option>
-                                            <option value="****">4 stars</option>
-                                            <option value="*****">5 stars</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group d-flex flex-column">
-                                    <label for="{{ review_form.review.id_for_label }}" style="color: #212529;" class="col-sm-2 col-form-label">Review: </label>
-                                    <div class="col-12">
-                                        <textarea 
-                                            class="form-control"
-                                            rows="3"
-                                            style="width: 100%; height:100px; border: 1px solid rgb(182, 178, 178);" 
-                                            type="text"
-                                            id="review" 
-                                            name = 'review'    
-                                        >
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" style="background-color: #17181B; color: white" class="btn mt-3 ms-2">Submit Review</button>
-                            </form>
+                        <div class="col-sm-6 col-8 info-commt text-right">
+                            <ul class="blog_list">
+                                <li>Price: ${{ hotel.price }}</li>
+                            </ul>
                         </div>
-                        {% endif %}
+                    </div>
+
+                    <p class="my-3">Facilities:</p>
+                    <ul class="style-lists">
+                        {% for facility in hotel.facilities.all %}
+                        <li>{{ facility.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% if user.is_authenticated %}
+                    {% if not user_has_booked %}
+                    <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank"
+                        class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
+                    {% endif %}
                     {% endif %}
 
+                    <!-- Reviews -->
 
-                        <p class="my-3">Reviews: {{reviews|length}}</p>
-                        {% for review in reviews %}
-                            <div class="media mt-3 col-8 p-4" style="background-color: #EEEEEE; border-radius: 5px;" id="
+
+
+
+                </div>
+            </div>
+
+
+            {% if user.is_authenticated %}
+            {% if user_has_booked and not review_owner %}
+            <div class="col-12">
+                <hr>
+                <p class="my-3 text-white">Write your Review:</p>
+                <form method="post" action="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
+                    {% csrf_token %}
+                    <div class="form-group d-flex flex-column">
+                        <label for="{{ review_form.rating.id_for_label }}" class="col-sm-2 text-white col-form-label"
+                            >Rating: </label>
+                        <div class="col-4">
+                            <select class="form-control p-2" style="border: 1px solid rgb(182, 178, 178);" id="rating"
+                                name="rating">
+                                <option value="*">1 star</option>
+                                <option value="**">2 stars</option>
+                                <option value="***">3 stars</option>
+                                <option value="****">4 stars</option>
+                                <option value="*****">5 stars</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex flex-column">
+                        <label for="{{ review_form.review.id_for_label }}" style="color: #212529;"
+                            class="col-sm-2 text-white col-form-label">Review: </label>
+                        <div class="col-12">
+                            <textarea class="form-control" rows="3"
+                                style="width: 100%; height:100px; border: 1px solid rgb(182, 178, 178);" type="text"
+                                id="review" name='review'>
+                                        </textarea>
+                        </div>
+                    </div>
+                    <button type="submit" style="background-color: #17181B; color: white" class="btn mt-3 ms-2">Submit
+                        Review</button>
+                </form>
+            </div>
+            {% endif %}
+            {% endif %}
+
+
+
+            <p class="my-3">Reviews: {{reviews|length}}</p>
+            {% for review in reviews %}
+            <div class="media mt-3 col-8 p-4" style="background-color: #EEEEEE; border-radius: 5px;" id="
                             review-{{review.slug}}">
-                                <div class="media-body pt-xl-2 pl-3 mr-3">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ review.student.image.url }}" alt="Reviewer Image" style="height: 30px; width:30px; border-radius: 50%; margin-bottom: 2px;">
-                                            <h5 class="ml-2">{{ review.student.user.get_full_name }}</h5>
-                                        </div>
-                                        
-                                        <div style="margin-right: 15px;">
-                                            {% for _ in review.rating %}
-                                                <span style="margin-left: 5px; color: rgb(159, 159, 55);">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                    </svg>
-                                                </span>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    <p>{{ review.review }}</p>
-                                </div>
-                                {% if review_owner %}
-                                <div class="d-flex flex-column align-items-center">
-                                    <button class="btn text-white mb-3 px-4" style="background-color: #17181B;" data-toggle="modal" data-target="#editModal"
-                                    data-review-slug="{{ review.slug }}"
-                                    data-rating="{{ review.rating }}"
-                                    data-review="{{ review.review }}"
-                                    >Edit</button>
-                                    <a href="{% url 'hotel:delete_review' slug=review.slug %}" class="btn btn-danger text-white" >Delete</a>
-                                </div>
-                                {% endif %}
-                            </div>
+                <div class="media-body pt-xl-2 pl-3 mr-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ review.student.image.url }}" alt="Reviewer Image"
+                                style="height: 30px; width:30px; border-radius: 50%; margin-bottom: 2px;">
+                            <h5 class="ml-2">{{ review.student.user.get_full_name }}</h5>
+                        </div>
+
+                        <div style="margin-right: 15px;">
+                            {% for _ in review.rating %}
+                            <span style="margin-left: 5px; color: rgb(159, 159, 55);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p>{{ review.review }}</p>
+                </div>
+                {% if review_owner %}
+                <div class="d-flex flex-column align-items-center">
+                    <button class="btn text-white mb-3 px-4" style="background-color: #17181B;" data-toggle="modal"
+                        data-target="#editModal" data-review-slug="{{ review.slug }}" data-rating="{{ review.rating }}"
+                        data-review="{{ review.review }}">Edit</button>
+                    <a href="{% url 'hotel:delete_review' slug=review.slug %}"
+                        class="btn btn-danger text-white">Delete</a>
+                </div>
+                {% endif %}
+            </div>
 
 
-                            <!-- Modal for update review-->
-                <div class="modal" tabindex="-1" role="dialog" id="editModal">
-                    <div class="modal-dialog" role="document">
+            
+            <!-- Modal for update review-->
+            <div class="modal" tabindex="-1" role="dialog" id="editModal">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #17181B; color: #EEEEEE;">
-                        <h5 class="modal-title">Edit Review</h5>
-                        <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                            <h5 class="modal-title">Edit Review</h5>
+                            <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <form method="post" action="{% url 'hotel:edit_review' slug=review.slug %}">
                                 {% csrf_token %}
                                 <div class="form-group d-flex flex-column">
-                                    <label for="rating" class="col-sm-2 col-form-label" style="color: #212529;">Rating: </label>
+                                    <label for="rating" class="col-sm-2 col-form-label" style="color: #212529;">Rating:
+                                    </label>
                                     <div class="col-4">
-                                        <select class="form-control p-2" 
-                                                style="border: 1px solid rgb(182, 178, 178);" 
-                                                id="rating" 
-                                                name="rating"
-                                            >
-                                            
-                                            <option value="*"{% if review.rating == '*' %} selected{% endif %}>1 star</option>
-                                            <option value="**"{% if review.rating == '**' %} selected{% endif %}>2 stars</option>
-                                            <option value="***"{% if review.rating == '***' %} selected{% endif %}>3 stars</option>
-                                            <option value="****"{% if review.rating == '****' %} selected{% endif %}>4 stars</option>
-                                            <option value="*****"{% if review.rating == '*****' %} selected{% endif %}>5 stars</option>
-                                            
+                                        <select class="form-control p-2" style="border: 1px solid rgb(182, 178, 178);"
+                                            id="rating" name="rating">
+
+                                            <option value="*"{% if review.rating == '*' %}selected{% endif %}>1 star
+                                            </option>
+                                            <option value="**"{% if review.rating == '**' %}selected{% endif %}>2 stars
+                                            </option>
+                                            <option value="***"{% if review.rating == '***' %}selected{% endif %}>3
+                                                stars</option>
+                                            <option value="****"{% if review.rating == '****' %}selected{% endif %}>4
+                                                stars</option>
+                                            <option value="*****"{% if review.rating == '*****' %}selected{% endif %}>5
+                                                stars</option>
+
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group d-flex flex-column">
-                                    <label for="review" style="color: #212529;" class="col-sm-2 col-form-label">Review: </label>
+                                    <label for="review" style="color: #212529;" class="col-sm-2 col-form-label">Review:
+                                    </label>
                                     <div class="col-12">
-                                        <textarea 
-                                            class="form-control"
-                                            rows="3"
-                                            style="width: 100%; height:100px; border: 1px solid rgb(182, 178, 178);" 
-                                            type="text"
-                                            id="review" 
-                                            name="review"    
-                                        >{{ review.review }}
-                                        </textarea>            
+                                        <textarea class="form-control" rows="3"
+                                            style="width: 100%; height:100px; border: 1px solid rgb(182, 178, 178);"
+                                            type="text" id="review" name="review">{{ review.review }}
+                                        </textarea>
                                     </div>
                                 </div>
                                 <!-- Add a submit button if needed -->
-                                <button type="submit" style="background-color: #17181B; color: white" class="btn mt-3 ms-2">Submit Review</button>
+                                <button type="submit" style="background-color: #17181B; color: white"
+                                    class="btn mt-3 ms-2">Submit Review</button>
                             </form>
                         </div>
-                        
+
                         <!-- <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary save-changes-btn">Save changes</button>
                         </div> -->
                     </div>
-                    </div>
                 </div>
-                        {% endfor %}
-
-
-
-                
             </div>
+
+            {% endfor %}
+
+
+
+
+
         </div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Show the modal and populate fields when the "Edit" button is clicked
-            $('.edit-btn').on('click', function () {
-                var reviewSlug = $(this).data('review-slug');
-                var rating = $(this).data('rating');
-                var reviewText = $(this).data('review');
-    
-                // Populate modal fields
-                $('#editModal').find('#rating').val(rating);
-                $('#editModal').find('#review').val(reviewText);
-    
-                // Set review ID as a data attribute for the Save changes button
-                $('#editModal').find('.save-changes-btn').data('review-slug', reviewSlug);
-    
-                // Show the modal
-                $('#editModal').modal('show');
-            });
-    
-            // Handle the "Save changes" button click
-            $('.save-changes-btn').on('click', function () {
-                var reviewSlug = $(this).data('review-slug');
-                var newRating = $('#editModal').find('#rating').val();
-                var newReviewText = $('#editModal').find('#review').val();
-    
-                // Perform the necessary actions, e.g., update the review via AJAX
-                // ...
-    
-                // Close the modal
-                $('#editModal').modal('hide');
-            });
+<script>
+    $(document).ready(function () {
+        // Show the modal and populate fields when the "Edit" button is clicked
+        $('.edit-btn').on('click', function () {
+            var reviewSlug = $(this).data('review-slug');
+            var rating = $(this).data('rating');
+            var reviewText = $(this).data('review');
+
+            // Populate modal fields
+            $('#editModal').find('#rating').val(rating);
+            $('#editModal').find('#review').val(reviewText);
+
+            // Set review ID as a data attribute for the Save changes button
+            $('#editModal').find('.save-changes-btn').data('review-slug', reviewSlug);
+
+            // Show the modal
+            $('#editModal').modal('show');
         });
-    </script>
+
+        // Handle the "Save changes" button click
+        $('.save-changes-btn').on('click', function () {
+            var reviewSlug = $(this).data('review-slug');
+            var newRating = $('#editModal').find('#rating').val();
+            var newReviewText = $('#editModal').find('#review').val();
+
+            // Perform the necessary actions, e.g., update the review via AJAX
+            // ...
+
+            // Close the modal
+            $('#editModal').modal('hide');
+        });
+    });
+</script>
 {% endblock %}

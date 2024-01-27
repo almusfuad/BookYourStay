@@ -7,22 +7,27 @@
 {% block content %}
 <div class="container my-5 d-flex px-5" style="background-color: #443937;">
     <div class="col-md-3 bg-light p-4 rounded">
-        <h2 class="text-center mb-4">{{ student.user.username }}</h2>
+        <h2 class="text-center mb-4 text-white" style="background-color: #443937;">{{ student.user.username }}</h2>
         <div class="d-flex flex-column align-items-center">
             <img src="{{ student.image.url }}" alt="Profile Image" class="img-fluid rounded-circle" style="height: 150px; width: 150px;">
-            <ul class="list-unstyled mt-3">
-                <li><a href="#" class="text-dark">Dashboard</a></li>
-                <li><a href="#" class="text-dark" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a></li>
-                <li><a href="#" class="text-dark">Change Password</a></li>
-                <li><a href="{% url 'student:logout' %}" class="text-dark">Logout</a></li>
+            <ul class="nav flex-column mt-5">
+                <li class="nav-item">
+                    <a href="#" class="btn btn-light btn-block mb-2">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link btn-block mb-2" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link btn-block mb-2" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'student:logout' %}" class="btn btn-link btn-block">Logout</a>
+                </li>
             </ul>
         </div>
     </div>
     <div class="col-md-8 p-5 bg-light rounded">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="col-md-4">
-                <img src="{{ student.image.url }}" alt="Profile Image" class="img-fluid rounded">
-            </div>
             <div class="col-md-7 ms-5">
                 <h3 class="mb-3"><strong>Account No: </strong>{{ student.account_no }}</h3>
                 <h4 class="mb-3"><strong>Full Name: </strong>{{ student.user.get_full_name }}</h4>
@@ -60,6 +65,43 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal for change password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #17181B; color: white">
+          <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+          <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Add your password change form here -->
+          <form method="post" action="{% url 'student:change_password' %}">
+            {% csrf_token %}
+            <!-- Your password change form fields go here -->
+            <div class="form-group">
+              <label for="old_password">Current Password</label>
+              <input type="password" class="form-control" id="old_password" name="old_password" required>
+            </div>
+            <div class="form-group">
+              <label for="new_password1">New Password</label>
+              <input type="password" class="form-control" id="new_password1" name="new_password1" required>
+            </div>
+            <div class="form-group">
+              <label for="new_password2">Confirm New Password</label>
+              <input type="password" class="form-control" id="new_password2" name="new_password2" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Change Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 <!-- Edit Profile Modal -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
@@ -124,6 +166,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
