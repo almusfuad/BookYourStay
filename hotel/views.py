@@ -40,8 +40,8 @@ class HotelDetailsView(DetailView):
                   context['user_has_booked'] = Booking.objects.filter(hotel=hotel, student = student).exists()   
                   context['review_owner'] = Review.objects.filter(hotel=hotel, student=student).exists()     # with exists() we get the boolean value
                   
-                  context['edit_review'] = Review.objects.filter(hotel=hotel, student=student).values('rating', 'review')
-                  print(context['edit_review'])
+                  context['edit_reviews'] = Review.objects.filter(hotel=hotel, student=student)
+                  print(Review.objects.filter(hotel=hotel, student=student))
                   context['review_form'] = ReviewForm(user = self.request.user)
             context['reviews'] = Review.objects.filter(hotel = hotel)
             return context

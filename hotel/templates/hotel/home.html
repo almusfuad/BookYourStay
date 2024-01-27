@@ -80,7 +80,7 @@
 <div class="rooms-w3ls bg-li py-5" id="price" style="background-color: #443937;">
     <div class="container-fluid py-xl-5 py-lg-3">
         <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Available Hotels</h3>
-        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3" style="color: white;">Welcome to the epitome of comfort and luxury – Palace for Stay, where each space tells a unique story of elegance and relaxation.</p>
 
         <div class="row">
             {% for hotel in hotels %}
@@ -190,11 +190,11 @@
   <section class="team-main-sec bg-li py-5" id="testi" style="background-color: #443937;">
       <div class="container py-xl-5 py-lg-3">
             <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Our Guests Love Us</h3>
-            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
+            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3" style="color: white;">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
             <div class="row text-center">
     
                 {% for review in reviews %}
-                <div class="col-lg-4 col-md-6 team-gd-info" >
+                <div class="col-lg-4 col-md-6 team-gd-info" style="height: 350px;">
                     <div class="team-gd">
                         
                         <div class="team-info" style="background-color: #b5d1de; border-radius: 10px;">
@@ -213,7 +213,7 @@
                                 </span>
                                 {% endfor %}
                             
-                            <p>{{ review.review }}</p>
+                            <p>{{ review.review|truncatewords:8 }}</p>
                         </div>
                     </div>
                 </div>

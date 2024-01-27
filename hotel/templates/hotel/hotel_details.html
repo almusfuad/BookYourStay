@@ -98,7 +98,7 @@
                             <h5 class="ml-2">{{ review.student.user.get_full_name }}</h5>
                         </div>
 
-                        <div style="margin-right: 15px;">
+                        <div style="margin-right: 18px;">
                             {% for _ in review.rating %}
                             <span style="margin-left: 5px; color: rgb(159, 159, 55);">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -112,7 +112,8 @@
                     </div>
                     <p>{{ review.review }}</p>
                 </div>
-                {% if review_owner %}
+                {% for edit_review in edit_reviews %}
+                {% if review.id == edit_review.id %}
                 <div class="d-flex flex-column align-items-center">
                     <button class="btn text-white mb-3 px-4" style="background-color: #17181B;" data-toggle="modal"
                         data-target="#editModal" data-review-slug="{{ review.slug }}" data-rating="{{ review.rating }}"
@@ -121,6 +122,7 @@
                         class="btn btn-danger text-white">Delete</a>
                 </div>
                 {% endif %}
+                {% endfor %}
             </div>
 
 
