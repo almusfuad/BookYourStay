@@ -28,10 +28,6 @@ class RegistrationForm(UserCreationForm):
                               image=self.cleaned_data['image'],
                               account_no = 100000 + user.id,
                         )
-                  
-            if self.cleaned_data['image']:
-                  student.image = self.cleaned_data['image']
-                  student.save()
 
             return user
 

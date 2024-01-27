@@ -26,6 +26,13 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
+# password reset email settings
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from django.http import Http404, HttpRequest
+
 # Create your views here.
 class RegistrationView(CreateView):
       model = Student
@@ -199,3 +206,33 @@ def custom_password_change(request):
                   messages.error(request, "Password don't match!")
                   
       return redirect('student:profile')
+
+
+UserModel = get_user_model()
+
+def get_domain_name(request: HttpRequest) -> str:
+      return request.get_host()
+
+def custom_password_reset_request(request):
+      if request.method == 'POST':
+            email = request.POST.get('email')
+            try:
+                  user = UserModel.objects.get(email=email)
+            except UserModel.DoesNotExist:
+                  user = None
+                  
+            if user:
+                  # generate token
+                  context = {
+                        'email': email,
+                        'domain': get_domain_name(request),
+                        'site_name': '',
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'user': user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'https',
+                  }
+                  
+                  reset_url = request.build_absolute_uri(
+                        reverse_lazy('password_reset_confirm', kwargs = {'uid64': context['uid'], 'token': context['token']})
+                  )
