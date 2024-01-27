@@ -36,16 +36,14 @@
 <body>
     <h2>Deposit Confirmation</h2>
     
-    <p>Dear {{ transaction.student.user.first_name }},</p>
+    <p>Dear {{ user.first_name }},</p>
 
-    <p>Your deposit of ${{ transaction.amount }} has been successfully processed.</p>
+    <p>Your deposit of ${{ amount }} has been successfully processed.</p>
 
     <p>Transaction Details:</p>
     <ul>
-        <li>Transaction ID: {{ transaction.id }}</li>
-        <li>Amount: ${{ transaction.amount }}</li>
-        <li>Date: {{ transaction.date_created }}</li>
-        <!-- Add more transaction details as needed -->
+        <li>Amount: ${{ amount }}</li>
+        <!-- You may include other transaction details here if needed -->
     </ul>
 
     <p>Thank you for choosing our services. Your account has been updated.</p>
@@ -53,6 +51,6 @@
     <!-- Add any additional content or images here -->
 
     <p>Best regards,<br>
-       The BookYourStay Finance Team</p>
+       The Developer</p>
 </body>
 </html>

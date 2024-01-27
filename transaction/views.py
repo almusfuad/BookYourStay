@@ -21,27 +21,31 @@ class DepositCreateView(CreateView):
       success_url = reverse_lazy('hotel:home')
       
       def form_valid(self, form):
-            user = self.request.user
+            try:
+                  user = self.request.user
             
-            student, created = Student.objects.get_or_create(user = user)
-            
-            form.instance.student = student
-            form.instance.status = 'D'
-            
-            deposit_amount = form.cleaned_data['amount']
-            student.balance += deposit_amount
-            student.save()
-            
-            transaction = Transaction.objects.create(student = student, amount = deposit_amount)
-            
-            email_subject = 'Deposit Confirmation'
-            email_body = render_to_string('email/deposit_success.html', {'transaction': transaction})
-            email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
-            email.attach_alternative(email_body, 'text/html')
-            email.send()
-            
-            messages.success(self.request, 'Deposit successful!')
-            return super().form_valid(form)
+                  student, created = Student.objects.get_or_create(user = user)
+                  
+                  form.instance.student = student
+                  form.instance.status = 'D'
+                  
+                  deposit_amount = form.cleaned_data['amount']
+                  student.balance += deposit_amount
+                  student.save()
+                  
+                  
+                  
+                  email_subject = 'Deposit Confirmation'
+                  email_body = render_to_string('email/deposit_success.html', {'user': user, 'amount': deposit_amount})
+                  email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
+                  email.attach_alternative(email_body, 'text/html')
+                  email.send()
+                  
+                  messages.success(self.request, 'Deposit successful!')
+                  return super().form_valid(form)
+            except Exception as e:
+                  messages.error(self.request, f"An error occurred: {str(e)}")
+                  return super().form_invalid(form)
             
       def get(self, request, *args, **kwargs):
             # Only logged-in users can make a deposit
