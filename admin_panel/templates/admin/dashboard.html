@@ -8,7 +8,7 @@ Admin - Dashboard
 <div class="container my-5 d-flex px-5" style="background-color: #443937;">
       <div class="col-md-3 bg-light p-4 rounded">
           <h2 class="text-center mb-2 text-white" style="background-color: #443937;"><strong>Admin: </strong>{{user.username}}</h2>
-          <h4 class="text-center mb-4"><strong>Name: </strong>{{ user.get_full_name }}</h4>
+          <!-- <h4 class="text-center mb-4"><strong>Name: </strong>{{ user.get_full_name }}</h4> -->
           <div class="d-flex flex-column align-items-center">
               <ul class="nav flex-column mt-5">
                   <li class="nav-item">
@@ -21,7 +21,7 @@ Admin - Dashboard
                       <button class="btn btn-link btn-block mb-2" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
                   </li>
                   <li class="nav-item">
-                      <a href="{% url 'admin_panel:logout' %}" class="btn btn-link btn-block">Logout</a>
+                      <a href="{% url 'admin_panel:admin-logout' %}" class="btn btn-link btn-block">Logout</a>
                   </li>
               </ul>
           </div>
@@ -70,7 +70,7 @@ Admin - Dashboard
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" style="color: #EEEEEE;" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -79,19 +79,19 @@ Admin - Dashboard
             {% csrf_token %}
             <div class="form-group">
                 <label for="id_username">Username:</label>
-                <input type="text" name="username" id="id_username" value="{{ form.username.value }}" class="form-control">
+                <input type="text" name="username" id="id_username" value="{{ user.username }}" class="form-control">
             </div>
             <div class="form-group">
                 <label for="id_first_name">First Name:</label>
-                <input type="text" name="first_name" id="id_first_name" value="{{ form.first_name.value }}" class="form-control">
+                <input type="text" name="first_name" id="id_first_name" value="{{ user.first_name }}" class="form-control">
             </div>
             <div class="form-group">
                 <label for="id_last_name">Last Name:</label>
-                <input type="text" name="last_name" id="id_last_name" value="{{ form.last_name.value }}" class="form-control">
+                <input type="text" name="last_name" id="id_last_name" value="{{ user.last_name }}" class="form-control">
             </div>
             <div class="form-group">
                 <label for="id_email">Email:</label>
-                <input type="email" name="email" id="id_email" value="{{ form.email.value }}" class="form-control">
+                <input type="email" name="email" id="id_email" value="{{ user.email }}" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
           </form>
@@ -108,7 +108,7 @@ Admin - Dashboard
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" style="color: #EEEEEE;" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -116,22 +116,27 @@ Admin - Dashboard
             <form action="{% url 'admin_panel:admin-password' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="id_old_password">Old Password:</label>
-                    <input type="password" name="old_password" id="id_old_password" class="form-control">
+                    <label for="old_password">Current Password</label>
+                    <input type="password" class="form-control" id="old_password" name="old_password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new_password1">New Password</label>
+                    <input type="password" class="form-control" id="new_password1" name="new_password1" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new_password2">Confirm New Password</label>
+                    <input type="password" class="form-control" id="new_password2" name="new_password2" required>
                 </div>
-                <div class="form-group">
-                    <label for="id_new_password1">New Password:</label>
-                    <input type="password" name="new_password1" id="id_new_password1" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="id_new_password2">Confirm New Password:</label>
-                    <input type="password" name="new_password2" id="id_new_password2" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Change Password</button>
+                  <button type="submit" class="btn btn-primary">Change Password</button>
             </form>
         </div>
       </div>
     </div>
   </div>  
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 {% endblock %}

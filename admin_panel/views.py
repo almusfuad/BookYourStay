@@ -25,7 +25,7 @@ def admin_profile(request):
                   messages.success(request, 'Admin profile updated successfully.')
             else:
                   messages.error(request, 'Admin profile update failed.')
-      return redirect('admin_panel:admin-dashboard', {'form': form})
+      return redirect('admin_panel:admin-dashboard')
 
 
 @login_required
@@ -37,7 +37,7 @@ def admin_password(request):
                   messages.success(request, 'Admin password updated successfully.')
             else:
                   messages.error(request, 'Admin password update failed')
-      return redirect('admin_panel:admin-dashboard', {'form': form})
+      return redirect('admin_panel:admin-dashboard')
 
 @login_required
 def admin_logout(request):
