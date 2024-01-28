@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin - Dashboard
+{% endblock %}
+{% block content %}
+
+<h1>Booking List</h1>
+<div class="container my-5 d-flex px-5" style="background-color: #443937;">
+      <div class="col-md-3 bg-light p-4 rounded">
+          <h2 class="text-center mb-2 text-white" style="background-color: #443937;"><strong>Admin: </strong>{{user.username}}</h2>
+          <h4 class="text-center mb-4"><strong>Name: </strong>{{ user.get_full_name }}</h4>
+          <div class="d-flex flex-column align-items-center">
+              <ul class="nav flex-column mt-5">
+                  <li class="nav-item">
+                      <a href="#" class="btn btn-light btn-block mb-2">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                      <button class="btn btn-link btn-block mb-2" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
+                  </li>
+                  <li class="nav-item">
+                      <button class="btn btn-link btn-block mb-2" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{% url 'admin_panel:logout' %}" class="btn btn-link btn-block">Logout</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="col-md-8 p-5 bg-light rounded">
+          <div class="mt-5">
+              <h3 class="mb-4">All Booking Details</h3>
+              <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>Hotel Name</th>
+                              <th>Booked User</th>
+                              <th>Arrival Date</th>
+                              <th>Departure Date</th>
+                              <th>Room Type</th>
+                              <th>No. of Guests</th>
+                              <th>Check Out</th>
+                              <th>Cancel</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for booking in bookings %}
+                          <tr>
+                              <td>{{ booking.hotel.name }}</td>
+                              <td>{{ booking.student.user.get_full_name }}</td>
+                              <td>{{ booking.arrival_date }}</td>
+                              <td>{{ booking.departure_date }}</td>
+                              <td>{{ booking.get_room_type_display }}</td>
+                              <td>{{ booking.no_of_guests }}</td>
+                              <td>{{ booking.is_check_out }}</td>
+                              <td>{{ booking.is_cancel }}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <!-- profile update modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'admin_panel:admin-profile' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" id="id_username" value="{{ form.username.value }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="id_first_name">First Name:</label>
+                <input type="text" name="first_name" id="id_first_name" value="{{ form.first_name.value }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="id_last_name">Last Name:</label>
+                <input type="text" name="last_name" id="id_last_name" value="{{ form.last_name.value }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" id="id_email" value="{{ form.email.value }}" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- password update modal -->
+<!-- Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'admin_panel:admin-password' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_old_password">Old Password:</label>
+                    <input type="password" name="old_password" id="id_old_password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="id_new_password1">New Password:</label>
+                    <input type="password" name="new_password1" id="id_new_password1" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="id_new_password2">Confirm New Password:</label>
+                    <input type="password" name="new_password2" id="id_new_password2" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Change Password</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+{% endblock %}

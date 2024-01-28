@@ -48,6 +48,22 @@
     margin-left: 0%;
 }
 
+.banner_slide_bg {
+    position: relative;
+    overflow: hidden;
+}
+.banner_slide_bg ul {
+    display: flex;
+    transition: transform 0.5s ease;
+    padding: 0;
+    margin: 0;
+}
+.banner_slide_bg li {
+    flex: 0 0 auto;
+    width: 100%;
+    list-style: none;
+}
+
 .csslider>ul {
     position: relative;
     height: 100vh;

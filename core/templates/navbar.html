@@ -12,7 +12,7 @@
                               <label for="drop" class="toggle">Menu</label>
                               <input type="checkbox" id="drop" />
                               <ul class="menu">
-                                    {% if user.is_authenticated %}
+                                    {% if user.is_authenticated and not user.is_superuser %}
                                     <li class="text-white mx-2">Balance: {{user.student.balance}}</li>
                                     {% endif %}
                                     <li><a href="{% url 'hotel:home' %}" class="">Home</a></li>
@@ -23,9 +23,14 @@
                                                             aria-hidden="true"></span></a>
                                                 <input type="checkbox" id="drop-2" />
                                                 <ul>
+                                                      {% if user.is_superuser %}
+                                                      <li><a href="{% url 'admin_panel:admin-dashboard' %}" class="drop-text">Admin Panel</a></li>
+                                                      <li><a href="{% url 'admin_panel:admin-logout' %}" class="drop-text">Logout</a></li>
+                                                      {% else %}
                                                       <li><a href="{% url 'student:profile' %}" class="drop-text">Profile</a></li>
                                                       <li><a href="{% url 'transaction:deposit' %}" class="drop-text">Deposit</a></li>
                                                       <li><a href="{% url 'student:logout' %}" class="drop-text">Logout</a></li>
+                                                      {% endif %}
                                                 </ul>
                                           </li>
                                     {% else %}

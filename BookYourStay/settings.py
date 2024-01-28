@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'student',
     'hotel',
     'booking',
-    'transaction',  
+    'transaction',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [

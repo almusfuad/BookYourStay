@@ -29,7 +29,7 @@
                         <li>{{ facility.name }}</li>
                         {% endfor %}
                     </ul>
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and not user.is_superuser %}
                     {% if not user_has_booked %}
                     <a href="{% url 'booking:booking-create' hotel_slug=hotel.slug %}" target="_blank"
                         class="btn button-style-2 mt-sm-5 mt-4">Book Now</a>
@@ -45,7 +45,7 @@
             </div>
 
 
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and not user.is_superuser %}
             {% if user_has_booked and not review_owner %}
             <div class="col-12">
                 <hr>

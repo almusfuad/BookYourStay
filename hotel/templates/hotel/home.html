@@ -3,59 +3,7 @@
 {% block title %}BookYourStay{% endblock %}
 
 {% block slider %}
-
-    <div class="banner_w3lspvt">
-        <div class="csslider infinity" id="slider1">
-            <input type="radio" name="slides" checked="checked" id="slides_1" />
-            <input type="radio" name="slides" id="slides_2" />
-            <input type="radio" name="slides" id="slides_3" />
-            <input type="radio" name="slides" id="slides_4" />
-            <ul class="banner_slide_bg">
-                <li>
-                    <div class="container">
-                        <div class="w3ls_banner_txt">
-                            <p>Welcome to BookYourStay</p>
-                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Hotel & Room Booking</h3>
-                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <div class="w3ls_banner_txt">
-                            <p>Welcome to BookYourStay</p>
-                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Enjoy Your Moments</h3>
-                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <div class="w3ls_banner_txt">
-                            <p>Welcome to BookYourStay</p>
-                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">Modern & Spacious Rooms</h3>
-                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <div class="w3ls_banner_txt">
-                            <p>Welcome to BookYourStay</p>
-                            <h3 class="w3ls_pvt-title text-wh text-uppercase let">In the Perfect Location</h3>
-                            <a href="" class="btn button-style mt-sm-5 mt-4">Read More</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="arrows">
-                <label for="slides_1"></label>
-                <label for="slides_2"></label>
-                <label for="slides_3"></label>
-                <label for="slides_4"></label>
-            </div>
-        </div>
-    </div>
+    {% include 'slider.html' %}
 {% endblock %}
 {% block content %}
 <div class="banner-bottom py-5">
@@ -92,7 +40,7 @@
                             </a>
                         </div>
                         <div class="price-w3ls-bottom p-4">
-                            <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank">{{ hotel.name }}</a></h4>
+                            <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">{{ hotel.name }}</a></h4>
                             <div class="lm-item-price">
                                 <h6>
                                     <!-- <span class="price-top-head">$</span> -->
@@ -105,7 +53,7 @@
                                     <li>{{ facility.name }}</li>
                                 {% endfor %}
                             </ul>
-                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" target="_blank" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
+                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
                         </div>
                     </div>
                 </div>
@@ -239,31 +187,13 @@
 		</div>
 	</div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
-        $(document).ready(() => {
-            // Function to automatically switch carousel slides
-            function autoSlide() {
-                var currentSlide = $("input[name='slides']:checked");
-                var nextSlide = currentSlide.closest('li').next('li').find("input[name='slides']");
-                
-                if (nextSlide.length === 0) {
-                    nextSlide = $('input[name="slides"]:first');
-                }
-                
-                currentSlide.prop("checked", false);
-                nextSlide.prop("checked", true);
-            }
-    
-            // Set interval for automatic sliding
-            setInterval(autoSlide, 8000);
-    
-            // Trigger the first slide manually (optional)
-            autoSlide();
-        });
+        
+                     
     </script>
     
 {% endblock %}
