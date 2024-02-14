@@ -177,7 +177,8 @@
 			<h3 class="tittle text-center text-bl font-weight-bold">Subscribe Newsletter</h3>
 			<p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Embark on a journey of discovery with our newsletter – where each word is a step into the extraordinary. Subscribe now and unlock a world of inspiration, where the beauty of each sentence is as captivating as the destinations we explore. Join us, and let the artistry of travel unfold in your inbox. Because in every line, there's an adventure waiting to be discovered.</p>
 			<div class="newsletter">
-				<form action="#" method="post">
+				<form action="{% url 'hotel:home'%}" method="post">
+                    {% csrf_token %}
 					<div class="form-group mb-0 w-100">
 						<input class="email" type="email" name="email" placeholder="Your email..." required="">
 					</div>

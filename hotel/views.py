@@ -12,6 +12,9 @@ from . forms import ReviewForm, EditReviewForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
+# subscriptions related
+from subscription.forms import SubscriberForm
+
 # Create your views here.
 class HotelListView(ListView):
       model = Hotel
@@ -22,6 +25,15 @@ class HotelListView(ListView):
             context = super().get_context_data(**kwargs)
             context['reviews'] = Review.objects.all()
             return context
+      
+      def post(self, request, *args, **kwargs):
+            subscriber_form = SubscriberForm(request.POST)
+            if subscriber_form.is_valid():
+                  subscriber_form.save()
+                  messages.success(request, "Thank you for subscribing!")
+            else:
+                  messages.error(request, "There was an error with your subscription.")
+            return super().get(request, *args, **kwargs)
       
 class HotelDetailsView(DetailView):
       model = Hotel

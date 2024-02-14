@@ -46,12 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'rest_framework',
+    'django_cron',
     'core',
     'student',
     'hotel',
     'booking',
     'transaction',
     'admin_panel',
+    'subscription',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +82,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+CRON_CLASSES = [
+    "subscription.cron."
 ]
 
 WSGI_APPLICATION = 'BookYourStay.wsgi.application'
