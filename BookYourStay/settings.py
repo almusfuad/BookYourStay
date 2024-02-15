@@ -85,7 +85,7 @@ TEMPLATES = [
 ]
 
 CRON_CLASSES = [
-    "subscription.cron."
+    "subscription.cron.SendMonthlyEmails"
 ]
 
 WSGI_APPLICATION = 'BookYourStay.wsgi.application'
