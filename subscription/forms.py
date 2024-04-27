@@ -4,5 +4,5 @@ from .models import Subscriber
 
 class SubscriberForm(forms.ModelForm):
       class Meta:
-            fields = Subscriber
+            model = Subscriber
             fields = ['email']

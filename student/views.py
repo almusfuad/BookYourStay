@@ -7,7 +7,7 @@ from booking.models import Booking
 from .forms import RegistrationForm, StudentUpdateForm, CustomUserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.http import HttpResponseRedirect
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
@@ -202,11 +202,14 @@ def custom_password_change(request):
             
             if form.is_valid():
                   user = form.save()
+                  update_session_auth_hash(request, user)
                   messages.success(request, 'Your password has been updated successfully.')
+                  return redirect('student:profile')
             else:
                   messages.error(request, "Password don't match!")
-                  
-      return redirect('student:profile')
+      else:
+            form = PasswordChangeForm(request.user)           
+      return render(request,'student/profile.html', {'form': form})
 
 
 UserModel = get_user_model()
