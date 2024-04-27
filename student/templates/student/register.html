@@ -1,7 +1,4 @@
-{% extends 'base.html' %}
-{% block title %}Registration{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Registration{% endblock %} {% block content %}
 
 <div class="register-w3 py-5">
     <div class="container py-xl-5 py-lg-3">
@@ -13,63 +10,52 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.username.id_for_label }}">Username</label>
-                            {{ form.username }}
+                            <label for="{{ form.username.id_for_label }}">Username</label> {{ form.username }}
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.email.id_for_label }}">Email</label>
-                            {{ form.email }}
+                            <label for="{{ form.email.id_for_label }}">Email</label> {{ form.email }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.first_name.id_for_label }}">First Name</label>
-                            {{ form.first_name }}
+                            <label for="{{ form.first_name.id_for_label }}">First Name</label> {{ form.first_name }}
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
-                            {{ form.last_name }}
+                            <label for="{{ form.last_name.id_for_label }}">Last Name</label> {{ form.last_name }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
-                            {{ form.phone }}
+                            <label for="{{ form.phone.id_for_label }}">Phone Number</label> {{ form.phone }}
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="{{ form.country.id_for_label }}">Country</label>
-                            {{ form.country }}
+                            <label for="{{ form.country.id_for_label }}">Country</label> {{ form.country }}
                         </div>
                     </div>
                     <div class="row">
-                        
+
                         <div class="col-lg-6 form-group d-flex flex-column">
                             <label for="{{ form.password1.id_for_label }}">Password</label>
-                            <input 
-                            name="password1"
-                            class="p-2" 
-                            type="password" 
-                            id="{{ form.password1.id_for_label }}"
-                            style="border: 1px solid rgb(182, 178, 178);"
-                            >
+                            <input name="password1" class="p-2 password-field" type="password" id="{{ form.password1.id_for_label }}" style="border: 1px solid rgb(182, 178, 178);">
                         </div>
-                        <div class="col-lg-6 form-group d-flex flex-column" >
-                              <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
-                              <input 
-                              name = "password2"
-                            class="p-2" 
-                            type="password" 
-                            id="{{ form.password2.id_for_label }}"
-                            style="border: 1px solid rgb(182, 178, 178);"
-                            >
-                          </div>
+                        <div class="col-lg-6 form-group d-flex flex-column">
+                            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                            <input name="password2" class="p-2 password-field" type="password" id="{{ form.password2.id_for_label }}" style="border: 1px solid rgb(182, 178, 178);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-3" type="checkbox" id="showPasswordCheckbox" style="transform: scale(1.3);" onchange="togglePasswordVisibility(this)">
+                                <label class="form-check-label mb-0 mt-1" for="showPasswordCheckbox">Show Password</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 form-group">
-                              <label for="{{ form.image.id_for_label }}">Image</label>
-                              {{ form.image }}
-                          </div>
-                        
+                            <label for="{{ form.image.id_for_label }}">Image</label> {{ form.image }}
+                        </div>
+
                     </div>
                     <button type="submit" class="btn submit mt-3">Register</button>
                 </form>
@@ -78,4 +64,17 @@
     </div>
 </div>
 
+{% endblock %} {% block scripts %}
+<script>
+    function togglePasswordVisibility(checkbox) {
+        var passwordFields = document.querySelectorAll('.password-field');
+        passwordFields.forEach(function(field) {
+            if (checkbox.checked) {
+                field.setAttribute('type', 'text');
+            } else {
+                field.setAttribute('type', 'password');
+            }
+        });
+    }
+</script>
 {% endblock %}
