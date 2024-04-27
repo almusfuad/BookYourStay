@@ -1,11 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}BookYourStay{% endblock %}
-
-{% block slider %}
-    {% include 'slider.html' %}
-{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}BookYourStay{% endblock %} {% block slider %} {% include 'slider.html' %} {% endblock %} {% block content %}
 <div class="banner-bottom py-5">
     <div class="d-md-flex container py-xl-3 py-lg-3">
         <div class="banner-left-bottom-w3ls">
@@ -32,31 +25,31 @@
 
         <div class="row">
             {% for hotel in hotels %}
-                <div class="col-lg-4 mb-4">
-                    <div class="price-mobamus mx-2" style="height: 680px; background-color: #b5d1de; border-radius: 5px;">
-                        <div class="price-top">
-                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
-                                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
-                            </a>
+            <div class="col-lg-4 mb-4">
+                <div class="price-mobamus mx-2" style="height: 680px; background-color: #b5d1de; border-radius: 5px;">
+                    <div class="price-top">
+                        <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">
+                            <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid fixed-size-image" style="width: 100%; height: 250px;" />
+                        </a>
+                    </div>
+                    <div class="price-w3ls-bottom p-4">
+                        <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">{{ hotel.name }}</a></h4>
+                        <div class="lm-item-price">
+                            <h6>
+                                <!-- <span class="price-top-head">$</span> -->
+                                <span class="price-midd-head">$ {{ hotel.price }}</span>
+                                <span class="price-right-head">/ per day</span>
+                            </h6>
                         </div>
-                        <div class="price-w3ls-bottom p-4">
-                            <h4 class="my-2"><a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}">{{ hotel.name }}</a></h4>
-                            <div class="lm-item-price">
-                                <h6>
-                                    <!-- <span class="price-top-head">$</span> -->
-                                    <span class="price-midd-head">$ {{ hotel.price }}</span>
-                                    <span class="price-right-head">/ per day</span>
-                                </h6>
-                            </div>
-                            <ul class="style-lists">
-                                {% for facility in hotel.facilities.all|slice:"3" %}
-                                    <li>{{ facility.name }}</li>
-                                {% endfor %}
-                            </ul>
-                            <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
-                        </div>
+                        <ul class="style-lists">
+                            {% for facility in hotel.facilities.all|slice:"3" %}
+                            <li>{{ facility.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{% url 'hotel:hotel_detail' slug=hotel.slug %}" class="btn button-style-2 mt-sm-5 mt-4">Details</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -69,17 +62,17 @@
         <h3 class="tittle text-center text-bl font-weight-bold">Why BookYourStay </h3>
         <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Choosing BookYourStay for your travel accommodations is not just a choice; it's a commitment to an unparalleled experience</p>
         <div class="row text-center">
-            <div class="col-lg-3 col-md-6 ser-grid" >
+            <div class="col-lg-3 col-md-6 ser-grid">
                 <span class="fa fa-cutlery"></span>
                 <h4>Restaurant</h4>
                 <p>Elevate your stay with a culinary journey; where every reservation is an invitation to savor exquisite moments at our distinguished restaurants..</p>
             </div>
-            <div class="col-lg-3 col-md-6 ser-grid mt-md-0 mt-5" >
+            <div class="col-lg-3 col-md-6 ser-grid mt-md-0 mt-5">
                 <span class="fa fa-money"></span>
                 <h4>Low Price</h4>
                 <p>Savor affordability without compromising flavor – where budget meets taste, creating a delightful dining experience for every guest.</p>
             </div>
-            <div class="col-lg-3 col-md-6 ser-grid mt-lg-0 mt-5" >
+            <div class="col-lg-3 col-md-6 ser-grid mt-lg-0 mt-5">
                 <span class="fa fa-user-secret"></span>
                 <h4>Secure Zone</h4>
                 <p>Experience tranquility in our secure haven, where your comfort and safety take center stage, ensuring peace of mind throughout your stay.</p>
@@ -115,7 +108,7 @@
                     <p>Unlock special deals and discounts when you book directly through our platform.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2" >
+            <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5 px-2">
                 <div class="welcome-grid py-5 px-4" style="background-color: #b5d1de; height: 400px;">
                     <img src="{% static 'images/wh2.jpg' %}" alt="" class="img-fluid">
                     <h4 class="mt-4 mb-3 text-bl">Personalized Service</h4>
@@ -134,67 +127,64 @@
 </div>
 <!-- //services -->
 
-  <!-- reviews -->
-  <section class="team-main-sec bg-li py-5" id="testi" style="background-color: #443937;">
-      <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Our Guests Love Us</h3>
-            <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3" style="color: white;">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
-            <div class="row text-center">
-    
-                {% for review in reviews %}
-                <div class="col-lg-4 col-md-6 team-gd-info" style="height: 350px;">
+<!-- reviews -->
+<section class="team-main-sec bg-li py-5" id="testi" style="background-color: #443937;">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold" style="color: white;">Our Guests Love Us</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3" style="color: white;">Each positive experience shared is a testament to our commitment to excellence and the unwavering dedication to creating memorable journeys. Your satisfaction is our inspiration, and your love is our greatest reward.</p>
+        <div class="row text-center">
+            {% for review in reviews %}
+            <div class="col-lg-4 col-md-6">
+                <div class="team-gd-info d-flex h-100">
                     <div class="team-gd">
-                        
-                        <div class="team-info" style="background-color: #b5d1de; border-radius: 10px;">
+                        <div class="team-info" style="background-color: #b5d1de; border-radius: 10px; height: 100%;">
                             <div class="team-img mb-4">
                                 {% if review.student.image %}
-                                <img src="{{ review.student.image.url }}" alt="reviewer image" style="height: 100px; width: 100px;">
-                                {% endif %}
+                                <img src="{{ review.student.image.url }}" alt="reviewer image" style="height: 100px; width: 100px;"> {% else %}
+                                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="reviewer image" style="height: 100px; width: 100px;"> {% endif %}
                             </div>
                             <h3>{{ review.student.user.get_full_name }} <span class="sub-tittle-team">{{ review.student.country }}</span> </h3>
-                            
+                            <div class="d-flex justify-content-center">
                                 {% for _ in review.rating %}
                                 <span style="margin-left: 5px; color: rgb(159, 159, 55);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                      </svg>
-                                </span>
-                                {% endfor %}
-                            
+                                    </svg>
+                                </span> {% endfor %}
+                            </div>
                             <p>{{ review.review|truncatewords:8 }}</p>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-    
             </div>
+            {% endfor %}
         </div>
-  </section>
+    </div>
+</section>
 
-  <!-- newsletter -->
-	<div class="newsletter_w3w3pvt py-5">
-		<div class="container py-xl-5 py-lg-3">
-			<h3 class="tittle text-center text-bl font-weight-bold">Subscribe Newsletter</h3>
-			<p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Embark on a journey of discovery with our newsletter – where each word is a step into the extraordinary. Subscribe now and unlock a world of inspiration, where the beauty of each sentence is as captivating as the destinations we explore. Join us, and let the artistry of travel unfold in your inbox. Because in every line, there's an adventure waiting to be discovered.</p>
-			<div class="newsletter">
-				<form action="{% url 'hotel:home'%}" method="post">
-                    {% csrf_token %}
-					<div class="form-group mb-0 w-100">
-						<input class="email" type="email" name="email" placeholder="Your email..." required="">
-					</div>
-					<button type="submit" class="btn">Subscribe</button>
-				</form>
-			</div>
-		</div>
-	</div>
+<!-- newsletter -->
+<div class="newsletter_w3w3pvt py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="tittle text-center text-bl font-weight-bold">Subscribe Newsletter</h3>
+        <p class="sub-tittle text-center mt-2 mb-sm-5 mb-4 pb-xl-3">Embark on a journey of discovery with our newsletter – where each word is a step into the extraordinary. Subscribe now and unlock a world of inspiration, where the beauty of each sentence is as captivating as the destinations we explore. Join
+            us, and let the artistry of travel unfold in your inbox. Because in every line, there's an adventure waiting to be discovered.</p>
+        <div class="newsletter">
+            <form action="{% url 'hotel:home'%}" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-0 w-100">
+                    <input class="email" type="email" name="email" placeholder="Your email..." required="">
+                </div>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <script>
-        
-                     
-    </script>
-    
+<script>
+</script>
+
 {% endblock %}

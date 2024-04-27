@@ -4,7 +4,10 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+
+
 /* Reset Code */
+
 body {
     padding: 0;
     margin: 0;
@@ -72,9 +75,12 @@ ol {
     padding: 0;
 }
 
+
 /* //Reset Code */
 
+
 /* colors code */
+
 .text-bl {
     color: #343a40;
 }
@@ -103,9 +109,12 @@ ol {
     color: #6c3cff;
 }
 
+
 /* //colors code */
 
+
 /* bottom-to-top */
+
 a.move-top {
     width: 34px;
     height: 34px;
@@ -117,30 +126,38 @@ a.move-top {
     z-index: 0;
 }
 
+
 /* //bottom-to-top */
 
+
 /* header */
+
 .main-top {
     position: relative;
-    
 }
 
 header {
     max-height: 100px;
-    position: absolute; 
+    position: absolute;
     width: 100%;
     z-index: 9;
 }
 
+
 /* navigation */
+
+
 /* CSS Document */
+
 .toggle-2,
 .toggle,
 [id^=drop] {
     display: none;
 }
 
+
 /* Giving a background-color to the nav container. */
+
 nav {
     margin: 0;
     padding-right: 60px;
@@ -167,8 +184,10 @@ nav:after {
     clear: both;
 }
 
+
 /* Removing padding, margin and "list-style" from the "ul",
- * and adding "position:reltive" */
+ * and adding "position:relative" */
+
 nav ul {
     float: right;
     padding: 0;
@@ -177,14 +196,18 @@ nav ul {
     position: relative;
 }
 
+
 /* Positioning the navigation items inline */
+
 nav ul li {
     margin: 0px;
     display: inline-block;
     /* float: left; */
 }
 
+
 /* Styling the links */
+
 nav a {
     color: #fff;
     font-size: 15px;
@@ -218,6 +241,7 @@ nav ul li ul li a:hover {
     -ms-transition: 0.5s all;
 }
 
+
 /* Background color change on Hover */
 
 .menu li a.active,
@@ -231,8 +255,10 @@ nav ul li ul li a:hover {
     -ms-transition: 0.5s all;
 }
 
+
 /* Hide Dropdowns by Default
  * and giving it a position of absolute */
+
 nav ul ul {
     display: none;
     position: absolute;
@@ -248,14 +274,19 @@ nav ul ul {
     /* has to be the same number as the "line-height" of "nav a" */
 }
 
+
 /* Display Dropdowns on Hover */
-nav ul li:hover > ul {
+
+nav ul li:hover>ul {
     display: inherit;
 }
 
+
 /* First Tier Dropdown */
-nav ul > li {
-    position: relative; /* Ensure the parent li is positioned */
+
+nav ul>li {
+    position: relative;
+    /* Ensure the parent li is positioned */
 }
 
 nav ul ul {
@@ -290,18 +321,23 @@ nav ul ul li a {
     margin-bottom: 10px;
 }
 
+
 /* Second, Third and more Tiers	
  * We move the 2nd and 3rd etc tier dropdowns to the left
  * by the amount of the width of the first tier.
 */
+
 nav ul ul ul li {
     position: relative;
-    top: -60px; /* has to be the same number as the "height" of "nav ul ul" */
-    left: 170px; /* has to be the same number as the "width" of "nav ul ul li" */
+    top: -60px;
+    /* has to be the same number as the "height" of "nav ul ul" */
+    left: 170px;
+    /* has to be the same number as the "width" of "nav ul ul li" */
 }
 
 
 /* Change ' +' in order to change the Dropdown symbol */
+
 li>a:only-child:after {
     content: '';
 }
@@ -315,13 +351,14 @@ a.reqe-button {
     border-radius: 4px;
 }
 
+
 /* Media Queries
 --------------------------------------------- */
+
 @media(max-width: 991px) {
     nav a {
         font-size: 14px;
     }
-
     #logo a {
         font-size: 38px;
     }
@@ -333,8 +370,7 @@ a.reqe-button {
     }
 }
 
-@media all and (max-width : 736px) {
-
+@media all and (max-width: 736px) {
     #logo {
         display: block;
         padding: 0;
@@ -342,18 +378,15 @@ a.reqe-button {
         text-align: center;
         float: none;
     }
-
     nav {
         margin: 0;
     }
-
     /* Hide the navigation menu by default */
     /* Also hide the  */
     .toggle+a,
     .menu {
         display: none;
     }
-
     /* Stylinf the toggle lable */
     .toggle {
         display: block;
@@ -377,7 +410,6 @@ a.reqe-button {
         -o-transition: 0.5s all;
         -ms-transition: 0.5s all;
     }
-
     .menu .toggle {
         float: none;
         text-align: center;
@@ -388,7 +420,6 @@ a.reqe-button {
         font-size: 14px;
         letter-spacing: 1px;
     }
-
     .toggle:hover {
         color: #f0546a;
         transition: 0.5s all;
@@ -397,7 +428,6 @@ a.reqe-button {
         -o-transition: 0.5s all;
         -ms-transition: 0.5s all;
     }
-
     /* Display Dropdown when clicked on Parent Lable */
     [id^=drop]:checked+ul {
         display: block;
@@ -406,28 +436,23 @@ a.reqe-button {
         text-align: center;
         width: 100%;
     }
-
     /* Change menu item's width to 100% */
     nav ul li {
         display: block;
         width: 100%;
         padding: 5px 0;
     }
-
     nav ul ul .toggle,
     nav ul ul a {
         padding: 0 40px;
     }
-
     nav ul ul ul a {
         padding: 0 80px;
     }
-
     nav a:hover,
     nav ul ul ul a {
         background-color: transparent;
     }
-
     nav ul li ul li .toggle,
     nav ul ul a,
     nav ul ul ul a {
@@ -435,13 +460,11 @@ a.reqe-button {
         color: #FFF;
         font-size: 17px;
     }
-
     /* 
     nav ul li ul li .toggle,
     nav ul ul a {
         background-color: #212121;
     } */
-
     /* Hide Dropdowns by Default */
     nav ul ul {
         float: none;
@@ -449,41 +472,33 @@ a.reqe-button {
         color: #fff;
         /* has to be the same number as the "line-height" of "nav a" */
     }
-
     /* Hide menus on hover */
     nav ul ul li:hover>ul,
     nav ul li:hover>ul {
         display: none;
     }
-
     /* Fisrt Tier Dropdown */
     nav ul ul li {
         display: block;
         width: 100%;
         padding: 0;
     }
-
     nav ul ul ul li {
         position: static;
         /* has to be the same number as the "width" of "nav ul ul li" */
-
     }
-
     nav a {
         color: #000;
         font-size: 15px;
         padding: 0;
         margin: 0;
     }
-
     nav ul ul li a {
         color: #000;
     }
-
     nav ul ul li a {
         font-size: 15px;
     }
-
     .menu li a.active,
     .menu li a:hover {
         color: #f0546a;
@@ -491,26 +506,26 @@ a.reqe-button {
     }
 }
 
-@media all and (max-width : 440px) {
+@media all and (max-width: 440px) {
     .toggle {
         padding: 7px 12px;
         font-size: 14px;
     }
-
     #logo a {
         font-size: 32px;
     }
 }
 
-@media all and (max-width : 375px) {
-
+@media all and (max-width: 375px) {
     nav a,
     .menu .toggle {
         font-size: 13px;
     }
 }
 
+
 /*-- dropdown --*/
+
 #demo {
     margin: 10px 0 0px 0;
     font-family: 'Lato', sans-serif;
@@ -543,6 +558,7 @@ a.reqe-button {
     padding-left: 0;
     padding-right: 0;
 }
+
 
 /* #demo .parent:hover,
 #demo .content:hover~.parent {
@@ -578,7 +594,6 @@ a.reqe-button {
     z-index: 3;
     /* -webkit-transition-delay: 0s; */
 }
-
 
 #demo .content ul {
     background: #fff;
@@ -618,6 +633,7 @@ a.reqe-button {
 
 
 /* banner */
+
 .banner_w3lspvt {
     position: relative;
     z-index: 1;
@@ -709,16 +725,16 @@ h3.w3ls_pvt-title {
     color: #fff;
 }
 
+
 /* banner responsive */
+
 @media(max-width: 1440px) {
     .csslider>ul>li {
         min-height: 700px;
     }
-
     .w3ls_banner_txt {
         margin-top: 13em;
     }
-
     h3.w3ls_pvt-title {
         font-size: 66px;
     }
@@ -728,15 +744,12 @@ h3.w3ls_pvt-title {
     .csslider>ul>li {
         min-height: 630px;
     }
-
     h3.w3ls_pvt-title {
         font-size: 56px;
     }
-
     .w3ls_banner_txt {
         margin-top: 11em;
     }
-
     .w3ls_banner_txt p {
         font-size: 14px;
     }
@@ -746,7 +759,6 @@ h3.w3ls_pvt-title {
     .w3ls_banner_txt {
         margin-left: 1em;
     }
-
     h3.w3ls_pvt-title {
         font-size: 52px;
     }
@@ -756,16 +768,13 @@ h3.w3ls_pvt-title {
     h3.w3ls_pvt-title {
         font-size: 45px;
     }
-
     .w3ls_banner_txt p {
         font-size: 13px;
         letter-spacing: 3px;
     }
-
     .csslider>ul>li {
         min-height: 600px;
     }
-
     .w3ls_banner_txt {
         margin-top: 12em;
     }
@@ -776,15 +785,12 @@ h3.w3ls_pvt-title {
         margin-top: 11em;
         margin-left: 2em;
     }
-
     h3.w3ls_pvt-title {
         font-size: 42px;
     }
-
     .button-style {
         font-size: 12px;
     }
-
     .csslider>ul>li {
         min-height: 570px;
     }
@@ -794,11 +800,9 @@ h3.w3ls_pvt-title {
     h3.w3ls_pvt-title {
         font-size: 40px;
     }
-
     .button-style {
         padding: 13px 20px;
     }
-
     .csslider>ul>li {
         min-height: 550px;
     }
@@ -808,11 +812,9 @@ h3.w3ls_pvt-title {
     .csslider>ul>li {
         min-height: 510px;
     }
-
     .w3ls_banner_txt {
         margin-top: 10em;
     }
-
     h3.w3ls_pvt-title {
         font-size: 36px;
     }
@@ -822,11 +824,9 @@ h3.w3ls_pvt-title {
     .csslider>ul>li {
         min-height: 470px;
     }
-
     .w3ls_banner_txt p {
         font-size: 12px;
     }
-
     .button-style {
         font-size: 11px;
     }
@@ -836,11 +836,9 @@ h3.w3ls_pvt-title {
     h3.w3ls_pvt-title {
         font-size: 33px;
     }
-
     .w3ls_banner_txt p {
         font-size: 11px;
     }
-
     .csslider>ul>li {
         min-height: 450px;
     }
@@ -850,11 +848,9 @@ h3.w3ls_pvt-title {
     .csslider>ul>li {
         min-height: 430px;
     }
-
     .w3ls_banner_txt {
         margin-top: 9em;
     }
-
     h3.w3ls_pvt-title {
         font-size: 31px;
     }
@@ -871,28 +867,29 @@ h3.w3ls_pvt-title {
         margin-left: 1em;
         margin-top: 8.5em;
     }
-
     .w3ls_banner_txt p {
         font-size: 10px;
     }
-
     .csslider>ul>li {
         min-height: 400px;
     }
-
     .button-style {
         font-size: 10px;
     }
-
     h3.w3ls_pvt-title {
         font-size: 27px;
     }
 }
 
+
 /* banner responsive */
+
+
 /* //banner */
 
+
 /* banner bottom */
+
 .banner-bottom.py-5 {
     background: #443937;
     z-index: 1;
@@ -937,15 +934,20 @@ h6.text-white {
     font-size: 14px;
 }
 
+
 /* //banner bottom */
 
+
 /* modal */
-.modal-header{
-    background-color: #17181B; 
+
+.modal-header {
+    background-color: #17181B;
     color: white
 }
 
+
 /* about */
+
 .main-img {
     position: relative;
 }
@@ -961,7 +963,9 @@ h6.text-white {
     left: -23%;
 }
 
+
 /* about right */
+
 h3.tittle-w3layouts {
     text-shadow: 2px 2px 2px rgba(41, 41, 41, 0.15);
     font-size: 40px;
@@ -987,10 +991,15 @@ a.btn.button-style-2 {
     border-radius: 0px;
 }
 
+
 /* //about right */
+
+
 /* //about */
 
+
 /* pricing */
+
 .price-top {
     background: rgba(240, 84, 106, 0.28);
     padding: 10px;
@@ -1043,9 +1052,12 @@ ul.style-lists li {
     list-style: inside;
 }
 
+
 /* //pricing */
 
+
 /* services */
+
 .serives-mobamu {
     background: url(../images/bg4.jpg) no-repeat bottom;
     background-size: cover;
@@ -1078,9 +1090,12 @@ ul.style-lists li {
     border-radius: 50%;
 }
 
+
 /* //services */
 
+
 /* middle */
+
 .middle {
     background: url(../images/bg2.jpg) no-repeat top;
     background-size: cover;
@@ -1102,9 +1117,12 @@ ul.style-lists li {
     text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
 }
 
+
 /* //middle */
 
+
 /* stats */
+
 .stats {
     background: url(../images/bg3.jpg) no-repeat center;
     background-size: cover;
@@ -1141,9 +1159,12 @@ h4.numscroller {
     background: rgba(14, 14, 14, 0.26);
 }
 
+
 /* //stats */
 
+
 /* why */
+
 .ser-grid h4 {
     font-size: 25px;
     letter-spacing: 1px;
@@ -1154,9 +1175,9 @@ h4.numscroller {
     border: 2px solid #ccc;
 }
 
-.ser-grid{
+.ser-grid {
     /* margin: 2px; */
-    border-radius: 5px; 
+    border-radius: 5px;
     border: 1px solid #443937;
 }
 
@@ -1165,9 +1186,12 @@ h4.numscroller {
     font-size: 50px;
 }
 
+
 /* //why */
 
+
 /* blog */
+
 .posts-top {
     position: relative;
 }
@@ -1214,9 +1238,12 @@ h4.numscroller {
     color: #000;
 }
 
+
 /* //blog */
 
+
 /* testimonials */
+
 .team-img img {
     -webkit-border-radius: 50%;
     -o-border-radius: 50%;
@@ -1255,9 +1282,12 @@ h4.numscroller {
     color: #ffb600;
 }
 
+
 /* //testimonials */
 
+
 /* newsletter */
+
 h3.tittle {
     font-size: 38px;
 }
@@ -1300,9 +1330,12 @@ p.sub-tittle {
     border-radius: 0px;
 }
 
+
 /* //newsletter */
 
+
 /* footer */
+
 footer {
     background: #17181b;
 }
@@ -1326,7 +1359,9 @@ h2.logo-2 a {
     border: none;
 }
 
+
 /* social icons */
+
 .mobamuits_social_list li {
     display: inline-block;
 }
@@ -1366,9 +1401,12 @@ h2.logo-2 a {
     background: #F44336;
 }
 
+
 /* //social-icons */
 
+
 /* contact address */
+
 .contact-info h4,
 h4.sub-con-fo {
     font-size: 16px;
@@ -1391,8 +1429,12 @@ h4.sub-con-fo {
     letter-spacing: 1px;
 }
 
+
 /* //contact address */
+
+
 /* copyright */
+
 .cpy-right {
     background: #1c1d21;
 }
@@ -1410,10 +1452,15 @@ h4.sub-con-fo {
     color: #ff6b6b;
 }
 
+
 /* //copyright */
+
+
 /* //footer */
 
+
 /* inner pages */
+
 .banner_w3lspvt-2 {
     background: url(../images/3.jpg) no-repeat center;
     background-size: cover;
@@ -1424,7 +1471,9 @@ h4.sub-con-fo {
     min-height: 300px;
 }
 
+
 /* page details */
+
 .breadcrumb li a {
     color: #fff;
     background: #313131;
@@ -1445,9 +1494,12 @@ h4.sub-con-fo {
     letter-spacing: 1px;
 }
 
+
 /* //page details */
 
+
 /* team */
+
 .caption {
     text-align: center;
 }
@@ -1516,14 +1568,18 @@ h4.sub-con-fo {
 }
 
 input {
-    height: 60px; 
-    
+    height: 60px;
 }
 
+
 /* //team */
+
+
 /* //about page*/
 
+
 /* gallery */
+
 .gal-img img {
     -moz-transition: 0.5s all;
     transition: 0.5s all;
@@ -1534,7 +1590,9 @@ input {
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, .3);
 }
 
+
 /* popup */
+
 .pop-overlay {
     position: fixed;
     top: 0px;
@@ -1581,10 +1639,15 @@ input {
     color: #f0546a;
 }
 
+
 /* //popup */
+
+
 /* //gallery */
 
+
 /* book */
+
 .form-group label {
     letter-spacing: 1px;
     font-size: 15px;
@@ -1626,7 +1689,9 @@ select.form-control:not([size]):not([multiple]) {
     resize: none;
 }
 
+
 /* date  */
+
 [type="date"] {
     background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
 }
@@ -1639,8 +1704,6 @@ select.form-control:not([size]):not([multiple]) {
     opacity: 0;
 }
 
-
-
 .date-plu input {
     border: none;
     color: #000;
@@ -1651,11 +1714,18 @@ select.form-control:not([size]):not([multiple]) {
     border: 1px solid #c7c4c4;
 }
 
+
 /* //date  */
+
+
 /* //book */
 
+
 /* contact */
+
+
 /* contact form */
+
 .contact-form .form-control {
     padding: 12px;
     color: #495057;
@@ -1699,8 +1769,12 @@ select.form-control:not([size]):not([multiple]) {
     border: none;
 }
 
+
 /* //contact form */
+
+
 /* contact address */
+
 .adress-info h6 {
     font-size: 18px;
     color: #f0546a;
@@ -1730,8 +1804,12 @@ form#contactform1 {
     padding: 5em 0 0 0;
 }
 
+
 /* //contact address */
+
+
 /* //contact */
+
 
 /* responsive */
 
@@ -1743,11 +1821,9 @@ form#contactform1 {
     .welcome-left h3 {
         font-size: 44px;
     }
-
     h4.numscroller {
         font-size: 46px;
     }
-
     .popup {
         margin: 4em auto;
     }
@@ -1757,18 +1833,15 @@ form#contactform1 {
     .price-w3ls-bottom h4 a {
         font-size: 30px;
     }
-
     .price-midd-head {
         font-size: 52px;
     }
-
     .banner_w3lspvt-2 {
         min-height: 280px;
     }
 }
 
 @media(max-width: 1280px) {
-
     .footer-text p,
     .contact-info p a,
     .contact-info p,
@@ -1776,15 +1849,12 @@ form#contactform1 {
     .footer-grid_section_1its li a {
         font-size: 14px;
     }
-
     .cpy-right p {
         font-size: 13px;
     }
-
     h3.tittle {
         font-size: 36px;
     }
-
     h3.tittle-w3layouts {
         font-size: 38px;
     }
@@ -1794,59 +1864,45 @@ form#contactform1 {
     h3.footer-title {
         font-size: 18px;
     }
-
     h2.logo-2 a {
         font-size: 32px;
     }
-
     h3.tittle {
         font-size: 34px;
     }
-
     p {
         font-size: 14px;
     }
-
     .welcome-left h3 {
         font-size: 40px;
     }
-
     .team-info {
         padding: 2em;
     }
-
     .team-info h3 {
         font-size: 22px;
     }
-
     h4.numscroller {
         font-size: 42px;
     }
-
     .price-w3ls-bottom h4 a {
         font-size: 26px;
     }
-
     .price-midd-head {
         font-size: 50px;
     }
-
     ul.style-lists li {
         font-size: 15px;
     }
-
     .price-top-head {
         font-size: 25px;
     }
-
     h3.tittle-w3layouts {
         font-size: 34px;
     }
-
     .banner-left-bottom-w3ls h3 {
         font-size: 36px;
     }
-
     .banner_w3lspvt-2 {
         min-height: 250px;
     }
@@ -1860,42 +1916,33 @@ form#contactform1 {
     nav a {
         font-size: 14px;
     }
-
     .welcome-left h3 {
         font-size: 36px;
     }
-
     .stats-grid span {
         margin-top: 18px;
     }
-
     .price-mobamus {
         max-width: 690px;
         margin: 0 auto;
     }
-
     .about-left-w3pvt {
         max-width: 450px;
         margin: 0 auto;
         margin-bottom: 15em;
     }
-
     h3.tittle-w3layouts {
         font-size: 32px;
     }
-
     .banner-left-bottom-w3ls h3 {
         font-size: 34px;
     }
-
     .banner-left-bottom-w3ls p {
         font-size: 13px;
     }
-
     .banner_w3lspvt-2 {
         max-height: 200px;
     }
-
     form#contactform1 {
         margin-top: 0;
         padding: 4em 0 0 0;
@@ -1907,7 +1954,6 @@ form#contactform1 {
         padding: 13px 30px;
         font-size: 14px;
     }
-
     .price-mobamus {
         max-width: 691px;
     }
@@ -1921,46 +1967,36 @@ form#contactform1 {
     .map-fo iframe {
         width: 100%;
     }
-
     h2.logo-2 a {
         font-size: 30px;
     }
-
     .newsletter input[type="email"] {
         font-size: 14px;
     }
-
     .welcome-left h3 {
         font-size: 32px;
     }
-
     h3.tittle-w3layouts {
         font-size: 30px;
     }
-
     .breadcrumb-item.active {
         font-size: 14px
     }
-
     .breadcrumb li a {
         font-size: 12px;
     }
-
     .mobamuinfo_mail_grid_right {
         padding: 2em;
     }
-
     .mobamuinfo_mail_grid_right input[type="text"],
     /* .mobamuinfo_mail_grid_right input[type="email"], */
     .mobamuinfo_mail_grid_right textarea,
     .mobamuinfo_mail_grid_right select {
         font-size: 14px;
     }
-
     .mobamuinfo_mail_grid_right textarea {
         min-height: 150px;
     }
-
     .mobamuinfo_mail_grid_right button {
         padding: 14px 40px;
         font-size: 14px;
@@ -1972,7 +2008,6 @@ form#contactform1 {
         max-width: 400px;
         margin-bottom: 14em;
     }
-
     a.w3ls-button-mobamu {
         padding: 14px 22px;
         font-size: 12px;
@@ -1985,7 +2020,6 @@ form#contactform1 {
     .banner-left-bottom-w3ls h3 {
         font-size: 32px;
     }
-
     .banner_w3lspvt-2 {
         min-height: 160px;
     }
@@ -1995,24 +2029,19 @@ form#contactform1 {
     .newsletter button {
         padding: 13px 22px
     }
-
     h3.tittle {
         font-size: 32px;
     }
-
     p {
         font-size: 13px;
     }
-
     .pos-aboimg2 {
         left: -16%;
     }
-
     .popup {
         max-width: 500px;
         margin: 5em 1em;
     }
-
     .mobamuinfo_mail_grid_right button {
         padding: 14px 30px;
         font-size: 13px;
@@ -2023,20 +2052,16 @@ form#contactform1 {
     .welcome-left h3 {
         font-size: 28px;
     }
-
     a.btn.button-style-2 {
         padding: 14px 24px;
     }
-
     .about-left-w3pvt {
         max-width: 300px;
         margin-bottom: 11em;
     }
-
     h3.tittle-w3layouts {
         font-size: 28px;
     }
-
     .banner-left-bottom-w3ls p {
         font-size: 12px;
     }
@@ -2048,7 +2073,6 @@ form#contactform1 {
     h3.tittle-w3layouts {
         font-size: 26px;
     }
-
     .popup {
         padding: 2.5em 1em 1.5em;
     }
@@ -2058,28 +2082,22 @@ form#contactform1 {
     h3.tittle {
         font-size: 30px;
     }
-
     .newsletter button {
         padding: 12px 22px;
         font-size: 13px;
     }
-
     .newsletter input[type="email"] {
         padding: 14px;
     }
-
     .welcome-left h3 {
         font-size: 26px;
     }
-
     .price-midd-head {
         font-size: 46px;
     }
-
     .banner_w3lspvt-2 {
         min-height: 140px;
     }
-
     .mobamuinfo_mail_grid_right input[type="text"],
     .mobamuinfo_mail_grid_right input[type="email"],
     .mobamuinfo_mail_grid_right textarea,
@@ -2093,11 +2111,9 @@ form#contactform1 {
     h2.logo-2 a {
         font-size: 28px;
     }
-
     .pos-aboimg2 {
         left: -12%;
     }
-
     .mobamuinfo_mail_grid_right {
         padding: 1.5em;
     }
@@ -2107,66 +2123,53 @@ form#contactform1 {
     h3.tittle {
         font-size: 28px;
     }
-
     .newsletter input[type="email"] {
         font-size: 13px;
         padding: 13px 10px;
     }
-
     .newsletter button {
         padding: 12px 12px;
         font-size: 12px;
         letter-spacing: 1px;
     }
-
     .welcome-left h3 {
         font-size: 24px;
     }
-
     h4.numscroller {
         font-size: 40px;
     }
-
     .stats-grid span {
         font-size: 30px;
     }
-
     .ser-grid h4 {
         font-size: 23px;
     }
-
     .price-w3ls-bottom h4 a {
         font-size: 25px;
     }
-
     .price-midd-head {
         font-size: 44px;
     }
-
     .about-left-w3pvt {
         max-width: 260px;
         margin-bottom: 9em;
     }
-
     h3.tittle-w3layouts {
         font-size: 24px;
     }
-
     h4.sub-tittle-w3layouts {
         font-size: 16px;
     }
-
     a.btn.button-style-2 {
         font-size: 12px;
     }
-
     .banner-left-bottom-w3ls h3 {
         font-size: 27px;
     }
-
     a.w3ls-button-mobamu {
         padding: 13px 22px;
     }
 }
+
 
 /* //responsive */
