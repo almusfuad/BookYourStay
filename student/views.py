@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetConfirmView
 from .models import Student
 from booking.models import Booking
 from .forms import RegistrationForm, StudentUpdateForm, CustomUserChangeForm
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.http import HttpResponseRedirect
@@ -218,25 +218,57 @@ def get_domain_name(request: HttpRequest) -> str:
       return request.get_host()
 
 def custom_password_reset_request(request):
-      if request.method == 'POST':
-            email = request.POST.get('email')
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
             try:
-                  user = UserModel.objects.get(email=email)
-            except UserModel.DoesNotExist:
-                  user = None
-                  
-            if user:
-                  # generate token
-                  context = {
-                        'email': email,
-                        'domain': get_domain_name(request),
-                        'site_name': '',
-                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                        'user': user,
-                        'token': default_token_generator.make_token(user),
-                        'protocol': 'https',
-                  }
-                  
-                  reset_url = request.build_absolute_uri(
-                        reverse_lazy('password_reset_confirm', kwargs = {'uid64': context['uid'], 'token': context['token']})
-                  )
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                # If user with provided email doesn't exist, still display success message
+                messages.success(request, 'Password reset email sent. Please check your inbox.')
+                return redirect('student:login')
+            
+            # Generate a password reset token
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            
+            # Construct the password reset link
+            reset_link = request.build_absolute_uri(
+                reverse_lazy('student:password_reset_confirm', args=[uid, token])
+            )
+            
+            # Sending email
+            email_subject = 'Password Reset Request'
+            email_body = render_to_string('email/password_reset_email.html', {'reset_link': reset_link})
+            email = EmailMultiAlternatives(email_subject, email_body, to=[user.email])
+            email.attach_alternative(email_body, 'text/html')
+            email.send()
+            
+            messages.success(request, 'Password reset email sent. Please check your inbox.')
+            return redirect('student:login')
+    else:
+        form = PasswordResetForm()
+    return render(request, 'student/password_reset_form.html', {'form': form})
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+      template_name = 'student/password_reset_confirm.html'
+
+      def form_valid(self, form):
+            user = form.save()
+            
+            user = authenticate(username = user.username, password = form.cleaned_data['new_password1'])
+            
+            if user is not None:
+                  login(self.request, user)
+                  messages.success(self.request, 'Password has been reset successfully.')
+                  return redirect('student:profile')
+            else:
+                  messages.error(self.request, 'Password reset failed.')
+                  return redirect('student:login')
+            
+
+      def form_invalid(self, form):
+            messages.error(self.request, 'Password reset link is invalid or has expired.')
+            return redirect('student:login')

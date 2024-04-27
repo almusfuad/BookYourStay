@@ -3,6 +3,7 @@ from subscription.models import Subscriber
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from datetime import datetime
+from django.urls import reverse
 
 class SendMonthlyEmails(CronJobBase):
       RUN_AT_TIMES = ['00:00']
@@ -15,8 +16,10 @@ class SendMonthlyEmails(CronJobBase):
             
             # Check the exact date for sending monthly emails
             if current_date.day == 28:
-                  
                   subscribers = Subscriber.objects.all()
+                  
+                  # unsubscribe link
+                  unsubscribe_link = reverse('unsubscribe')
             
                   # send email to each subscriber
                   for subscriber in subscribers:
