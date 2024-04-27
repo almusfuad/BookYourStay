@@ -27,6 +27,7 @@ class HotelListView(ListView):
             return context
       
       def post(self, request, *args, **kwargs):
+            #TODO: value error at / ModelForm has no model class specified
             subscriber_form = SubscriberForm(request.POST)
             if subscriber_form.is_valid():
                   subscriber_form.save()

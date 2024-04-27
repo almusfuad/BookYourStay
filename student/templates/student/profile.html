@@ -1,15 +1,12 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}
-{{ student.user.username }}
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %} {{ student.user.username }} {% endblock %} {% block content %}
 <div class="container my-5 d-flex px-5" style="background-color: #443937;">
     <div class="col-md-3 bg-light p-4 rounded">
         <h2 class="text-center mb-4 text-white" style="background-color: #443937;">{{ student.user.username }}</h2>
         <div class="d-flex flex-column align-items-center">
-            <img src="{{ student.image.url }}" alt="Profile Image" class="img-fluid rounded-circle" style="height: 150px; width: 150px;">
+            <!-- TODO: Correct the image error -->
+            {% if student.image %}
+            <img src="{{ student.image.url }}" alt="Profile Image" class="img-fluid rounded-circle" style="height: 150px; width: 150px;"> {% else %}
+            <img src="{% static 'default_image.png' %}" alt="Profile Image" class="img-fluid rounded-circle" style="height: 150px; width: 150px;"> {% endif %}
             <ul class="nav flex-column mt-5">
                 <li class="nav-item">
                     <a href="#" class="btn btn-light btn-block mb-2">Dashboard</a>
@@ -70,36 +67,36 @@
 <!-- Modal for change password -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #17181B; color: white">
-          <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-          <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #17181B; color: white">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add your password change form here -->
+                <form method="post" action="{% url 'student:change_password' %}">
+                    {% csrf_token %}
+                    <!-- Your password change form fields go here -->
+                    <div class="form-group">
+                        <label for="old_password">Current Password</label>
+                        <input type="password" class="form-control" id="old_password" name="old_password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password1">New Password</label>
+                        <input type="password" class="form-control" id="new_password1" name="new_password1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password2">Confirm New Password</label>
+                        <input type="password" class="form-control" id="new_password2" name="new_password2" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          <!-- Add your password change form here -->
-          <form method="post" action="{% url 'student:change_password' %}">
-            {% csrf_token %}
-            <!-- Your password change form fields go here -->
-            <div class="form-group">
-              <label for="old_password">Current Password</label>
-              <input type="password" class="form-control" id="old_password" name="old_password" required>
-            </div>
-            <div class="form-group">
-              <label for="new_password1">New Password</label>
-              <input type="password" class="form-control" id="new_password1" name="new_password1" required>
-            </div>
-            <div class="form-group">
-              <label for="new_password2">Confirm New Password</label>
-              <input type="password" class="form-control" id="new_password2" name="new_password2" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Change Password</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 
@@ -107,8 +104,8 @@
 <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #17181B; color: white"> 
-                <h5 class="modal-title" id="editProfileModalLabel" >Edit Profile</h5>
+            <div class="modal-header" style="background-color: #17181B; color: white">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
                 <button type="button" style="color: #EEEEEE;" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -119,11 +116,9 @@
                     {% csrf_token %}
                     <!-- Display form errors -->
                     {% if form.errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
+                    <div class="alert alert-danger">
+                        {% for error in form.errors %} {{ error }} {% endfor %}
+                    </div>
                     {% endif %}
                     <div class="form-group">
                         <label for="id_username">Username:</label>
@@ -134,32 +129,32 @@
                         <label for="id_email">Email:</label>
                         <input type="email" name="email" id="id_email" class="form-control" value="{{ user.email }}">
                     </div>
-            
+
                     <div class="form-group">
                         <label for="id_first_name">First Name:</label>
                         <input type="text" name="first_name" id="id_first_name" class="form-control" value="{{ user.first_name }}">
                     </div>
-            
+
                     <div class="form-group">
                         <label for="id_last_name">Last Name:</label>
                         <input type="text" name="last_name" id="id_last_name" class="form-control" value="{{ user.last_name }}">
                     </div>
-            
+
                     <div class="form-group">
                         <label for="id_phone">Phone Number:</label>
                         <input type="text" name="phone" id="id_phone" class="form-control" value="{{ student.phone }}">
                     </div>
-            
+
                     <div class="form-group">
                         <label for="id_image">Profile Image:</label>
                         <input type="file" name="image" id="id_image" class="form-control-file">
                     </div>
-            
+
                     <div class="form-group">
                         <label for="id_country">Country:</label>
                         <input type="text" name="country" id="id_country" class="form-control" value="{{ student.country }}">
                     </div>
-            
+
                     <button type="submit" class="btn btn-primary">Update Profile</button>
                 </form>
             </div>

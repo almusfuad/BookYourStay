@@ -45,6 +45,7 @@ class RegistrationView(CreateView):
             if form.is_valid():
                   return self.form_valid(form)
             else:
+                  #TODO: handle invalid form errorsS
                   return self.form_invalid(form)
 
       def form_valid(self, form):
@@ -97,7 +98,7 @@ class RegistrationView(CreateView):
             return redirect('student:login')
 
       def form_invalid(self, form):
-                  for error in form,errors:
+                  for error in form.errors:
                         messages.error(self.request, f'Account creation failed. {error}')
                   return render(self.request, 'student/register.html', {'form': form})
             
